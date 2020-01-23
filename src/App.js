@@ -1,8 +1,11 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ListItems from './Items';
 
-function App() {
+function App(props) {
+  console.log('props', props);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +21,7 @@ function App() {
         >
           Learn React
         </a>
+        {ListItems(props)}
       </header>
     </div>
   );
