@@ -3,8 +3,10 @@ import logo from './logo.svg';
 import './App.css';
 import ListItems from './Items';
 
+console.log('ListItems', ListItems);
+
 function App(props) {
-  console.log('props', props);
+  const arr = [1, 2, 3];
 
   return (
     <div className="App">
@@ -22,7 +24,7 @@ function App(props) {
         >
           Learn React
         </a>
-        {ListItems(props)} // @TODO: use like a component rather than just a function
+        <ListItems items={arr} />
       </header>
     </div>
   );

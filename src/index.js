@@ -3,19 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
-const arr = [1, 2, 3];
-
-const getTime = ()=> {
-    const date = new Date();
-
-    const time = [date.getHours(), date.getMinutes(), date.getSeconds()];
-
-    return time.map((el)=> {
-        return el > 9 ? el : `0${el}`;
-    }).join(':');
-}
-
+import getTime from './Time';
 
 const containerDOM = document.getElementById('root');
 const callback = ()=> {
@@ -23,7 +11,7 @@ const callback = ()=> {
 }
 
 setInterval(()=> {
-    const componentReact = <App items={arr} time={getTime()}/>;
+    const componentReact = <App time={getTime()}/>;
     return ReactDOM.render(componentReact, containerDOM, callback);
 }, 1000)
 
