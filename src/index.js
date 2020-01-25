@@ -10,10 +10,10 @@ const callback = ()=> {
     console.log('React component has been rendered :)');
 }
 
-setInterval(()=> {
+// setInterval(()=> {
     const componentReact = <App time={getTime()}/>;
-    return ReactDOM.render(componentReact, containerDOM, callback);
-}, 1000)
+    ReactDOM.render(componentReact, containerDOM, callback);
+// }, 1000)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -1,21 +1,22 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import ListItems from './Items';
+import ToDoList from './ToDoList';
 
-console.log('ListItems', ListItems);
+// console.log('ToDoList', ToDoList);
 
 function App(props) {
-  const arr = [1, 2, 3];
+  let todos = [
+    {id: 1, completed: true, title: 'React learning'},
+    {id: 2, completed: false, title: 'Workout'},
+    {id: 3, completed: false, title: 'Swimming'}
+  ];
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>{props.time}</h1>
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -24,7 +25,7 @@ function App(props) {
         >
           Learn React
         </a>
-        <ListItems items={arr} />
+        <ToDoList todos={todos}/>
       </header>
     </div>
   );
