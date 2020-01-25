@@ -19,7 +19,7 @@ const callback = ()=> {
 
 const comment = {
     author: {
-        avatarUrl: '#',
+        avatarUrl: 'https://scontent.fiev2-1.fna.fbcdn.net/v/t1.0-1/p160x160/70123177_1348495001969784_2789565899948949504_n.jpg?_nc_cat=106&_nc_ohc=4TjX_CgcpAIAX-FeHNV&_nc_ht=scontent.fiev2-1.fna&_nc_tp=6&oh=7b14cfd3aa538f2c3103d45726aed068&oe=5E95A729',
         name: 'Serhii Khrapin'
     },
     text: 'I believe it is a great idea!',
