@@ -5,7 +5,7 @@ function ToDoList({todos}) {
     return (
         <ul>
             {todos.map(todo => {
-                return <ToDoItems title={todo.title} id={todo.id}/>;
+                return <ToDoItems key={todo.id} title={todo.title} id={todo.id}/>;
             })}
         </ul>
     )
