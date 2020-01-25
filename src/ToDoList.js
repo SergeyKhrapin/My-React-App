@@ -1,11 +1,11 @@
 import React from 'react';
 import ToDoItems from './ToDoItems';
 
-function ToDoList(props) {
+function ToDoList({todos}) {
     return (
         <ul>
-            {props.todos.map(todo => {
-                return <ToDoItems todo={todo} />;
+            {todos.map(todo => {
+                return <ToDoItems title={todo.title} />;
             })}
         </ul>
     )
