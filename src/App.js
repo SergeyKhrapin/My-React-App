@@ -7,7 +7,7 @@ import Comment from './comments/Comment';
 // console.log('ToDoList', ToDoList);
 
 function App(props) {
-  let todos = [
+  const todos = [
     {id: 1, completed: true, title: 'React learning'},
     {id: 2, completed: false, title: 'Workout'},
     {id: 3, completed: false, title: 'Swimming'}
@@ -25,7 +25,7 @@ function App(props) {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>{props.time}</h1>
+        <h1>{props.time.toLocaleTimeString()}</h1>
         <img src={logo} className="App-logo" alt="logo" />
         <a
           className="App-link"

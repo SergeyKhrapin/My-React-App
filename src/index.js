@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './serviceWorker'; // @TODO: Learn - promises are used in serviceWorker
 
 const containerDOM = document.getElementById('root');
 const callback = ()=> {
@@ -10,7 +10,7 @@ const callback = ()=> {
 }
 
 const renderComponent = ()=> {
-    const componentReact = <App time={new Date().toLocaleTimeString()}/>;
+    const componentReact = <App time={new Date()}/>;
     ReactDOM.render(componentReact, containerDOM, callback);
 }
 
