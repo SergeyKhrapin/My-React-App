@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ToDoItems from './ToDoItems';
+import PropTypes from 'prop-types';
 
 function ToDoList({todos}) {
     const style = {
@@ -17,7 +17,7 @@ function ToDoList({todos}) {
 }
 
 ToDoList.propTypes = {
-    todos: PropTypes.array
+    todos: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default ToDoList;
