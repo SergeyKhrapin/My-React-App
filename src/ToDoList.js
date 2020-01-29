@@ -3,12 +3,8 @@ import ToDoItems from './ToDoItems';
 import PropTypes from 'prop-types';
 
 function ToDoList({todos}) {
-    const style = {
-        listStyle: 'none',
-    };
-
     return (
-        <ul style={style}>
+        <ul className="todo-list">
             {todos.map((todo, i) => {
                 return <ToDoItems key={todo.id} title={todo.title} index={i + 1}/>;
             })}
