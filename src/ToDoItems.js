@@ -20,13 +20,13 @@ const styles = {
     },
 };
 
-function ToDoItems({title, index}) {
+function ToDoItems({todo, index, onChangeToDO}) {
     return (
         <li className="todo-item" style={styles.item}>
             <span>
-                <input type="checkbox"/>
+                <input type="checkbox" onChange={()=> onChangeToDO(todo.id)} />
                 <strong style={styles.index}>{index}.</strong>
-                <span className="todo-item__title">{title}</span>
+                <span className="todo-item__title">{todo.title}</span>
             </span>
             <button className="todo-item__delete" style={styles.deleteButton}>&times;</button>
         </li>

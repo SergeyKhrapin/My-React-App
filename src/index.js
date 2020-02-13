@@ -14,7 +14,9 @@ const renderComponent = ()=> {
     ReactDOM.render(componentReact, containerDOM, callback);
 }
 
-setInterval(renderComponent, 1000);
+renderComponent();
+
+// setInterval(renderComponent, 1000);
 
 
 // If you want your app to work offline and load faster, you can change

@@ -7,8 +7,8 @@ import Comment from './comments/Comment';
 // console.log('ToDoList', ToDoList);
 
 function App(props) {
-  const todos = [
-    {id: 1, completed: true, title: 'React learning'},
+  let todos = [
+    {id: 1, completed: false, title: 'React learning'},
     {id: 2, completed: false, title: 'Workout'},
     {id: 3, completed: false, title: 'Swimming'}
   ];
@@ -21,6 +21,15 @@ function App(props) {
     text: 'I believe it is a great idea!',
     date: '1/25/2020'
   };
+
+  function changeCheckbox(id) {
+    todos.forEach((el, i)=> {
+      if (el.id === id) {
+        todos[i].completed = !todos[i].completed;
+      }
+    });
+    console.log(todos);
+  }
 
   return (
     <div className="App">
@@ -35,7 +44,7 @@ function App(props) {
         >
           Learn React
         </a>
-        <ToDoList todos={todos}/>
+        <ToDoList todos={todos} onToggle={changeCheckbox}/>
       </header>
 
       <div className="Comment">

@@ -15,3 +15,7 @@ code {
 .todo-list {
   width: 30%;
 }
+
+input:checked ~ .todo-item__title {
+  text-decoration: line-through;
+}
