@@ -16,11 +16,11 @@ function App(props) {
 
   const comment = {
     author: {
-        avatarUrl: faker.fake("{{image.avatar}}"),
-        name: 'Serhii Khrapin'
+        avatarUrl: faker.image.avatar(),
+        name: faker.name.firstName() + ' ' + faker.name.lastName()
     },
-    text: 'I believe it is a great idea!',
-    date: '1/25/2020'
+    text: faker.lorem.sentence(),
+    date: faker.date.recent().getMonth() + '/' + faker.date.recent().getDate() + '/' + faker.date.recent().getFullYear()
   };
 
   function changeCheckbox(id) {
