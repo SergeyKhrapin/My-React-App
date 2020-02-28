@@ -3,9 +3,6 @@ import logo from './logo.svg';
 import './App.css';
 import ToDoList from './ToDoList';
 import Comment from './comments/Comment';
-import faker from 'faker';
-
-// console.log('ToDoList', ToDoList);
 
 function App(props) {
   let todos = [
@@ -14,14 +11,7 @@ function App(props) {
     {id: 3, completed: false, title: 'Swimming'}
   ];
 
-  const comment = {
-    author: {
-        avatarUrl: faker.image.avatar(),
-        name: faker.name.firstName() + ' ' + faker.name.lastName()
-    },
-    text: faker.lorem.sentence(),
-    date: faker.date.recent().getMonth() + '/' + faker.date.recent().getDate() + '/' + faker.date.recent().getFullYear()
-  };
+  const commentsAmount = [1, 2, 3];
 
   function changeCheckbox(id) {
     todos.forEach((el, i)=> {
@@ -49,7 +39,7 @@ function App(props) {
       </header>
 
       <div className="Comment">
-        <Comment comment={comment} />
+        {commentsAmount.map(()=> <Comment />)}
       </div>
     </div>
   );
