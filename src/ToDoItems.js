@@ -20,18 +20,20 @@ const styles = {
     },
 };
 
-function ToDoItems({todo, index, onChangeToDO}) {
-    return (
-        <li className="todo-item" style={styles.item}>
-            <span>
-                <input type="checkbox" onChange={()=> onChangeToDO(todo.id)} />
-                <strong style={styles.index}>{index}.</strong>
-                <span className="todo-item__title">{todo.title}</span>
-            </span>
-            <button className="todo-item__delete" style={styles.deleteButton}>&times;</button>
-        </li>
-    )
-}
+const ToDoItems = ({todo, index, onChangeToDO}) => {
+  const className = `todo-item todo-item-${index}`;
+  
+  return (
+    <li className={className} style={styles.item}>
+      <span>
+        <input type="checkbox" onChange={()=> onChangeToDO(todo.id)} />
+        <strong style={styles.index}>{index}.</strong>
+        <span className="todo-item__title">{todo.title}</span>
+      </span>
+      <button className="todo-item__delete" style={styles.deleteButton}>&times;</button>
+    </li>
+  )
+};
 
 ToDoItems.propTypes = {
     index: PropTypes.number,

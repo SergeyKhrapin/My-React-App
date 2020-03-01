@@ -1,11 +1,9 @@
 import React from 'react';
 
-function Date({date}) {
+const Date = props => {
     return (
-        <div className="Comment-date">
-            {date}
-        </div>
+        <div className="Comment-date">{props.date}</div>
     )
-}
+};
 
 export default Date;

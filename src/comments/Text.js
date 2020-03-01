@@ -1,11 +1,9 @@
 import React from 'react';
 
-function Text({text}) {
+const Text = props => {
     return (
-        <div className="Comment-text">
-            {text}
-        </div>
+        <div className="Comment-text">{props.text}</div>
     )
-}
+};
 
 export default Text;

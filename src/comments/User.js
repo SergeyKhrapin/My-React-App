@@ -1,15 +1,13 @@
 import React from 'react';
 import Avatar from './Avatar';
 
-function User({user}) {
+const User = props => {
     return (
         <div className="UserInfo">
-          <Avatar user={user}/>
-          <div className="UserInfo-name">
-            {user.name}
-          </div>
+          <Avatar user={props.user} />
+          <div className="UserInfo-name">{props.user.name}</div>
         </div>
     )
-}
+};
 
 export default User;

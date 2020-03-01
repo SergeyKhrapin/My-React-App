@@ -2,7 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ToDoList from './ToDoList';
-import Comment from './comments/Comment';
+import CommentDetails from './comments/CommentDetails';
+import CommentCard from './comments/CommentCard';
 
 function App(props) {
   let todos = [
@@ -39,7 +40,7 @@ function App(props) {
       </header>
 
       <div className="Comment">
-        {commentsAmount.map(()=> <Comment />)}
+        {commentsAmount.map(() => <CommentCard><CommentDetails /></CommentCard>)}
       </div>
     </div>
   );

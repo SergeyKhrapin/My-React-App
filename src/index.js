@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Comment from './comments/Comment';
 import * as serviceWorker from './serviceWorker'; // @TODO: Learn - promises are used in serviceWorker
 
 const callback = ()=> {
