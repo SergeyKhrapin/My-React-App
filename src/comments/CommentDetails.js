@@ -5,8 +5,6 @@ import Date from './Date';
 import faker from 'faker';
 
 const CommentDetails = props => {
-  console.log(props);
-
   const comment = {
     author: {
         avatarUrl: faker.image.avatar(),

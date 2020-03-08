@@ -4,8 +4,9 @@ import './App.css';
 import ToDoList from './ToDoList';
 import CommentDetails from './comments/CommentDetails';
 import CommentCard from './comments/CommentCard';
+import Seasons from './seasons/Seasons';
 
-function App(props) {
+const App = props => {
   let todos = [
     {id: 1, completed: false, title: 'React learning'},
     {id: 2, completed: false, title: 'Workout'},
@@ -22,6 +23,29 @@ function App(props) {
     });
     console.log(todos);
   }
+
+  /* Seasons logic - START */
+
+  const currentMonth = new Date().getMonth();
+  const isBetweenMarchAndOctober = currentMonth >= 2 && currentMonth <= 9;
+  let isNorthernHemisphere, isWinter;
+  
+  const promise = new Promise(function(resolve, reject) {
+    navigator.geolocation.getCurrentPosition(pos => {
+      const latitude = pos.coords.latitude;
+      isNorthernHemisphere = latitude > 0 && latitude < 90;
+      isWinter = isNorthernHemisphere && !isBetweenMarchAndOctober || !isNorthernHemisphere && isBetweenMarchAndOctober;
+      resolve(isWinter);
+    });
+  });
+
+  promise.then(
+    result => {
+      console.log(result);
+    }
+  )
+
+  /* Seasons logic - END */
 
   return (
     <div className="App">
@@ -42,8 +66,12 @@ function App(props) {
       <div className="Comment">
         {commentsAmount.map(() => <CommentCard><CommentDetails /></CommentCard>)}
       </div>
+
+      <div className="seasons">
+        <Seasons isWinter={isWinter} />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
