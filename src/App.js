@@ -14,13 +14,20 @@ const App = props => {
   ]);
 
   const doneToDo = id => {
-    const newState = state.map(el => {
+    setState(state.map(el => {
       if (el.id === id) {
         el.completed = !el.completed;
       }
       return el;
-    });
-    setState(newState);
+    }));
+  };
+
+  const deleteToDo = id => {
+    setState(state.filter(el => {
+      if (el.id !== id) {
+        return el;
+      }
+    }));
   };
   /* ToDo logic - END */
 
@@ -53,7 +60,7 @@ const App = props => {
     <div className="App">
       <header className="App-header">
         <h1>{props.time.toLocaleTimeString()}</h1>
-        <ToDoList todos={state} onToggle={doneToDo}/>
+        <ToDoList todos={state} onToggle={doneToDo} onDelete={deleteToDo} />
       </header>
 
       <div className="Comment">

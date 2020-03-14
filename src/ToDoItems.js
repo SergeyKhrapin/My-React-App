@@ -20,19 +20,19 @@ const styles = {
   },
 };
 
-const ToDoItems = ({todo, index, onChangeToDO}) => {
-  console.log('todo ', todo);
-  const liClassName = `todo-item todo-item-${index}`;
-  const titleClassName = `todo-item__title ${todo.completed && 'done'}`;
+const ToDoItems = props => {
+  console.log('todo ', props.todo);
+  const liClassName = `todo-item todo-item-${props.index}`;
+  const titleClassName = `todo-item__title ${props.todo.completed && 'done'}`;
 
   return (
     <li className={liClassName} style={styles.item}>
       <span>
-        <input type="checkbox" onChange={()=> onChangeToDO(todo.id)} checked={todo.completed} />
-        <strong style={styles.index}>{index}.</strong>
-        <span className={titleClassName}>{todo.title}</span>
+        <input type="checkbox" onChange={() => props.onChangeToDO(props.todo.id)} checked={props.todo.completed} />
+        <strong style={styles.index}>{props.index}.</strong>
+        <span className={titleClassName}>{props.todo.title}</span>
       </span>
-      <button className="todo-item__delete" style={styles.deleteButton}>&times;</button>
+      <button className="todo-item__delete" onClick={() => props.onDeleteToDo(props.todo.id)} style={styles.deleteButton}>&times;</button>
     </li>
   )
 };
