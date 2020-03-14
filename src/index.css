@@ -16,6 +16,6 @@ code {
   width: 30%;
 }
 
-input:checked ~ .todo-item__title {
+.done {
   text-decoration: line-through;
 }

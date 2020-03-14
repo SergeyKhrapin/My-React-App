@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import ToDoList from './ToDoList';
 import CommentDetails from './comments/CommentDetails';
@@ -7,29 +6,33 @@ import CommentCard from './comments/CommentCard';
 import Seasons from './seasons/Seasons';
 
 const App = props => {
-  let todos = [
-    {id: 1, completed: false, title: 'React learning'},
+  /* ToDo logic - START */
+  let [state, setState] = React.useState([
+    {id: 1, completed: true, title: 'React learning'},
     {id: 2, completed: false, title: 'Workout'},
     {id: 3, completed: false, title: 'Swimming'}
-  ];
+  ]);
 
-  const commentsAmount = [1, 2, 3];
-
-  function changeCheckbox(id) {
-    todos.forEach((el, i)=> {
+  const doneToDo = id => {
+    const newState = state.map(el => {
       if (el.id === id) {
-        todos[i].completed = !todos[i].completed;
+        el.completed = !el.completed;
       }
+      return el;
     });
-    console.log(todos);
-  }
+    setState(newState);
+  };
+  /* ToDo logic - END */
+
+  /* Comments logic - START */
+  const commentsAmount = [1, 2, 3];
+  /* Comments logic - END */
 
   /* Seasons logic - START */
-
   const currentMonth = new Date().getMonth();
   const isBetweenMarchAndOctober = currentMonth >= 2 && currentMonth <= 9;
   let isNorthernHemisphere, isWinter;
-  
+
   const promise = new Promise(function(resolve, reject) {
     navigator.geolocation.getCurrentPosition(pos => {
       const latitude = pos.coords.latitude;
@@ -44,23 +47,13 @@ const App = props => {
       console.log(result);
     }
   )
-
   /* Seasons logic - END */
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>{props.time.toLocaleTimeString()}</h1>
-        <img src={logo} className="App-logo" alt="logo" />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <ToDoList todos={todos} onToggle={changeCheckbox}/>
+        <ToDoList todos={state} onToggle={doneToDo}/>
       </header>
 
       <div className="Comment">
