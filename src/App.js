@@ -37,20 +37,14 @@ const App = props => {
   const isBetweenMarchAndOctober = currentMonth >= 2 && currentMonth <= 9;
   let isNorthernHemisphere, isWinter;
 
-  const promise = new Promise(function(resolve, reject) {
-    navigator.geolocation.getCurrentPosition(pos => {
-      const latitude = pos.coords.latitude;
-      isNorthernHemisphere = latitude > 0 && latitude < 90;
-      isWinter = isNorthernHemisphere && !isBetweenMarchAndOctober || !isNorthernHemisphere && isBetweenMarchAndOctober;
-      resolve(isWinter);
-    });
-  });
+  const [seasonState, setSeasonState] = React.useState(isWinter);
 
-  promise.then(
-    result => {
-      console.log(result);
-    }
-  )
+  navigator.geolocation.getCurrentPosition(pos => {
+    const latitude = pos.coords.latitude;
+    isNorthernHemisphere = latitude > 0 && latitude < 90;
+    isWinter = isNorthernHemisphere && !isBetweenMarchAndOctober || !isNorthernHemisphere && isBetweenMarchAndOctober;
+    setSeasonState(isWinter);
+  });
   /* Seasons logic - END */
 
   return (
@@ -67,7 +61,7 @@ const App = props => {
       </div>
 
       <div className="seasons">
-        <Seasons isWinter={isWinter} />
+        <Seasons isWinter={seasonState} />
       </div>
     </div>
   );

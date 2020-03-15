@@ -9,10 +9,13 @@ const styles = {
 };
 
 const Seasons = props => {
+  console.log('isWinter ', props.isWinter);
+  const src = props.isWinter ? snowflake : sun;
+  const season = props.isWinter ? 'winter' : 'summer';
   return (
     <div>
-      <img src={props.isWinter ? snowflake : sun} style={styles.image}/>
-      <h5>Probably it's a summer now :)</h5>
+      <img src={src} style={styles.image}/>
+      <h5>Probably it's a {season} now :)</h5>
     </div>
   );
 };
