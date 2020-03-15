@@ -10,8 +10,6 @@ const ToDoList = props => {
           key={todo.id}
           todo={todo}
           index={i + 1}
-          onChangeToDO={props.onToggle}
-          onDeleteToDo={props.onDelete}
         />;
       })}
     </ul>

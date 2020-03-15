@@ -4,6 +4,7 @@ import ToDoList from './ToDoList';
 import CommentDetails from './comments/CommentDetails';
 import CommentCard from './comments/CommentCard';
 import Seasons from './seasons/Seasons';
+import ToDoContext from './context';
 
 const App = props => {
   /* ToDo logic - START */
@@ -23,11 +24,7 @@ const App = props => {
   };
 
   const deleteToDo = id => {
-    setState(state.filter(el => {
-      if (el.id !== id) {
-        return el;
-      }
-    }));
+    setState(state.filter(el => el.id !== id));
   };
   /* ToDo logic - END */
 
@@ -60,7 +57,9 @@ const App = props => {
     <div className="App">
       <header className="App-header">
         <h1>{props.time.toLocaleTimeString()}</h1>
-        <ToDoList todos={state} onToggle={doneToDo} onDelete={deleteToDo} />
+        <ToDoContext.Provider value={{doneToDo, deleteToDo}}>
+          <ToDoList todos={state} />
+        </ToDoContext.Provider>
       </header>
 
       <div className="Comment">
