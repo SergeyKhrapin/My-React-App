@@ -5,17 +5,18 @@ import CommentDetails from './comments/CommentDetails';
 import CommentCard from './comments/CommentCard';
 import Seasons from './seasons/Seasons';
 import ToDoContext from './context';
+import ToDoListEmpty from './ToDoListEmpty';
 
 const App = props => {
   /* ToDo logic - START */
-  let [state, setState] = React.useState([
+  let [todos, setToDos] = React.useState([
     {id: 1, completed: true, title: 'React learning'},
     {id: 2, completed: false, title: 'Workout'},
     {id: 3, completed: false, title: 'Swimming'}
   ]);
 
   const doneToDo = id => {
-    setState(state.map(el => {
+    setToDos(todos.map(el => {
       if (el.id === id) {
         el.completed = !el.completed;
       }
@@ -24,7 +25,7 @@ const App = props => {
   };
 
   const deleteToDo = id => {
-    setState(state.filter(el => el.id !== id));
+    setToDos(todos.filter(el => el.id !== id));
   };
   /* ToDo logic - END */
 
@@ -52,7 +53,7 @@ const App = props => {
       <header className="App-header">
         <h1>{props.time.toLocaleTimeString()}</h1>
         <ToDoContext.Provider value={{doneToDo, deleteToDo}}>
-          <ToDoList todos={state} />
+          { todos.length ? <ToDoList todos={todos} /> : <ToDoListEmpty /> }
         </ToDoContext.Provider>
       </header>
 
