@@ -6,14 +6,28 @@ import CommentCard from './comments/CommentCard';
 import Seasons from './seasons/Seasons';
 import ToDoContext from './context';
 import ToDoListEmpty from './ToDoListEmpty';
+import AddToDoItem from './AddToDoItem';
 
 const App = props => {
   /* ToDo logic - START */
-  let [todos, setToDos] = React.useState([
-    {id: 1, completed: true, title: 'React learning'},
-    {id: 2, completed: false, title: 'Workout'},
-    {id: 3, completed: false, title: 'Swimming'}
-  ]);
+  let [todos, setToDos] = React.useState([]);
+
+  const submitNewToDo = event => {
+    event.preventDefault();
+    const toDoTitle = event.target.dataset.value.trim();
+    if (toDoTitle) {
+      todos.push({
+        id: todos.length + 1,
+        completed: false,
+        title: toDoTitle,
+      });
+      setToDos(Object.assign([], todos));
+    }
+  };
+
+  const changeToDoInput = event => {
+    event.target.form.dataset.value = event.target.value;
+  };
 
   const doneToDo = id => {
     setToDos(todos.map(el => {
@@ -52,6 +66,7 @@ const App = props => {
     <div className="App">
       <header className="App-header">
         <h1>{props.time.toLocaleTimeString()}</h1>
+        <AddToDoItem changeToDoInput={changeToDoInput} submitNewToDo={submitNewToDo} />
         <ToDoContext.Provider value={{doneToDo, deleteToDo}}>
           { todos.length ? <ToDoList todos={todos} /> : <ToDoListEmpty /> }
         </ToDoContext.Provider>
