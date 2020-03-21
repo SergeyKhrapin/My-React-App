@@ -10,7 +10,7 @@ import AddToDoItem from './AddToDoItem';
 
 const App = props => {
   console.log('App has been rerendered');
-  /* ToDo logic - START */
+
   let [todos, setToDos] = React.useState([]);
   let [inputValue, setInputValue] = React.useState('');
 
@@ -43,26 +43,6 @@ const App = props => {
   const deleteToDo = id => {
     setToDos(todos.filter(el => el.id !== id));
   };
-  /* ToDo logic - END */
-
-  /* Comments logic - START */
-  const commentsAmount = [1, 2, 3];
-  /* Comments logic - END */
-
-  /* Seasons logic - START */
-  const currentMonth = new Date().getMonth();
-  const isBetweenMarchAndOctober = currentMonth >= 2 && currentMonth <= 9;
-  let isNorthernHemisphere, isWinter;
-
-  const [seasonState, setSeasonState] = React.useState(isWinter);
-
-  navigator.geolocation.getCurrentPosition(pos => {
-    const latitude = pos.coords.latitude;
-    isNorthernHemisphere = latitude > 0 && latitude < 90;
-    isWinter = isNorthernHemisphere && !isBetweenMarchAndOctober || !isNorthernHemisphere && isBetweenMarchAndOctober;
-    setSeasonState(isWinter);
-  });
-  /* Seasons logic - END */
 
   return (
     <div className="App">
@@ -80,12 +60,12 @@ const App = props => {
 
       <section className="section comment-section">
         <h2>Comments</h2>
-        {commentsAmount.map(() => <CommentCard><CommentDetails /></CommentCard>)}
+        {[1, 2, 3].map(() => <CommentCard><CommentDetails /></CommentCard>)}
       </section>
 
       <section className="section seasons-section">
         <h2>Seasons</h2>
-        <Seasons isWinter={seasonState} />
+        <Seasons />
       </section>
     </div>
   );
