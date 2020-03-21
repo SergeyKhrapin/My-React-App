@@ -9,24 +9,26 @@ import ToDoListEmpty from './ToDoListEmpty';
 import AddToDoItem from './AddToDoItem';
 
 const App = props => {
+  console.log('App has been rerendered');
   /* ToDo logic - START */
   let [todos, setToDos] = React.useState([]);
+  let [inputValue, setInputValue] = React.useState('');
 
   const submitNewToDo = event => {
     event.preventDefault();
-    const toDoTitle = event.target.dataset.value.trim();
-    if (toDoTitle) {
-      todos.push({
+    const val = inputValue.trim();
+    if (val) {
+      setToDos(todos.concat([{
         id: todos.length + 1,
+        title: val,
         completed: false,
-        title: toDoTitle,
-      });
-      setToDos(Object.assign([], todos));
+      }]));
+      setInputValue('');
     }
   };
 
   const changeToDoInput = event => {
-    event.target.form.dataset.value = event.target.value;
+    setInputValue(event.target.value);
   };
 
   const doneToDo = id => {
@@ -70,7 +72,7 @@ const App = props => {
 
       <section className="section todo-section">
         <h2>ToDos</h2>
-        <AddToDoItem changeToDoInput={changeToDoInput} submitNewToDo={submitNewToDo} />
+        <AddToDoItem value={inputValue} changeToDoInput={changeToDoInput} submitNewToDo={submitNewToDo} />
         <ToDoContext.Provider value={{doneToDo, deleteToDo}}>
           { todos.length ? <ToDoList todos={todos} /> : <ToDoListEmpty /> }
         </ToDoContext.Provider>

@@ -9,7 +9,7 @@ const styles = {
 };
 
 const Seasons = props => {
-  console.log('isWinter ', props.isWinter);
+  // console.log('isWinter ', props.isWinter);
   const src = props.isWinter ? snowflake : sun;
   const season = props.isWinter ? 'winter' : 'summer';
   return (
