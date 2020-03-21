@@ -7,6 +7,7 @@ import Seasons from './seasons/Seasons';
 import ToDoContext from './context';
 import ToDoListEmpty from './ToDoListEmpty';
 import AddToDoItem from './AddToDoItem';
+import SectionTitle from './SectionTitle';
 
 const App = props => {
   console.log('App has been rerendered');
@@ -51,7 +52,7 @@ const App = props => {
       </header>
 
       <section className="section todo-section">
-        <h2>ToDos</h2>
+        <SectionTitle title="ToDos" />
         <AddToDoItem value={inputValue} changeToDoInput={changeToDoInput} submitNewToDo={submitNewToDo} />
         <ToDoContext.Provider value={{doneToDo, deleteToDo}}>
           { todos.length ? <ToDoList todos={todos} /> : <ToDoListEmpty /> }
@@ -59,12 +60,12 @@ const App = props => {
       </section>
 
       <section className="section comment-section">
-        <h2>Comments</h2>
+        <SectionTitle title="Comments" />
         {[1, 2, 3].map(() => <CommentCard><CommentDetails /></CommentCard>)}
       </section>
 
       <section className="section seasons-section">
-        <h2>Seasons</h2>
+        <SectionTitle title="Seasons" />
         <Seasons />
       </section>
     </div>
