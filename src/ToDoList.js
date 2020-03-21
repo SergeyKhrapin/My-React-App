@@ -2,9 +2,18 @@ import React from 'react';
 import ToDoItems from './ToDoItems';
 import PropTypes from 'prop-types';
 
+const styles = {
+  list: {
+    width: '80%',
+    maxWidth: '500px',
+    margin: '20px auto 0',
+    padding: 0
+  }
+};
+
 const ToDoList = props => {
   return (
-    <ul className="todo-list">
+    <ul className="todo-list" style={styles.list}>
       {props.todos.map((todo, i) => {
         return <ToDoItems
           key={todo.id}

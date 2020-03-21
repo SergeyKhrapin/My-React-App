@@ -2,8 +2,7 @@ import React from 'react';
 
 const styles = {
   commentCard: {
-    width: '50%',
-    margin: '10px auto',
+    margin: '10px 0',
     padding: '10px',
     border: '1px solid gray',
     borderRadius: '5px',

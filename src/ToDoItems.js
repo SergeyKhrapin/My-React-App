@@ -6,8 +6,9 @@ const styles = {
   item: {
     display: 'flex',
     justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 10,
-    padding: '10px 10px',
+    padding: '5px 10px',
     border: '1px solid #fff',
     borderRadius: 8,
     listStyle: 'none',
@@ -17,7 +18,8 @@ const styles = {
   },
   deleteButton: {
     background: 'red',
-    border: 'none'
+    border: 'none',
+    cursor: 'pointer',
   },
 };
 

@@ -12,8 +12,13 @@ code {
     monospace;
 }
 
-.todo-list {
-  width: 30%;
+.section {
+  width: 90%;
+  margin: 20px auto;
+  padding: 10px;
+  background-color: #282c34;
+  border-radius: 5px;
+  color: #fff;
 }
 
 .done {

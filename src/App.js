@@ -66,19 +66,25 @@ const App = props => {
     <div className="App">
       <header className="App-header">
         <h1>{props.time.toLocaleTimeString()}</h1>
+      </header>
+
+      <section className="section todo-section">
+        <h2>ToDos</h2>
         <AddToDoItem changeToDoInput={changeToDoInput} submitNewToDo={submitNewToDo} />
         <ToDoContext.Provider value={{doneToDo, deleteToDo}}>
           { todos.length ? <ToDoList todos={todos} /> : <ToDoListEmpty /> }
         </ToDoContext.Provider>
-      </header>
+      </section>
 
-      <div className="Comment">
+      <section className="section comment-section">
+        <h2>Comments</h2>
         {commentsAmount.map(() => <CommentCard><CommentDetails /></CommentCard>)}
-      </div>
+      </section>
 
-      <div className="seasons">
+      <section className="section seasons-section">
+        <h2>Seasons</h2>
         <Seasons isWinter={seasonState} />
-      </div>
+      </section>
     </div>
   );
 };
