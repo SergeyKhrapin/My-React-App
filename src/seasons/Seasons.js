@@ -3,36 +3,34 @@ import sun from '../sun.png';
 import snowflake from '../snowflake.png';
 
 class Seasons extends React.Component {
-  styles = {
-    image: {
-      width: '150px',
-    },
+  constructor() {
+    super();
+    this.state = {isWinter: true};
   }
-  
-  currentMonth = new Date().getMonth();
-  isBetweenMarchAndOctober = this.currentMonth >= 2 && this.currentMonth <= 9;
-  isNorthernHemisphere;
-  isWinter;
-  
-  // const [seasonState, setSeasonState] = React.useState(isWinter);
-  
-  src = this.isWinter ? snowflake : sun;
-  season = this.isWinter ? 'winter' : 'summer';
-  
-  render() {
-    // console.log('seasonState ', this.isWinter);
 
+  render() {
+    const styles = {
+      image: {
+        width: '150px',
+      },
+    };
+    
+    const currentMonth = new Date().getMonth();
+    const isFromMarchToOctober = currentMonth >= 2 && currentMonth <= 9;
+    
     navigator.geolocation.getCurrentPosition(pos => {
       const latitude = pos.coords.latitude;
-      this.isNorthernHemisphere = latitude > 0 && latitude < 90;
-      this.isWinter = this.isNorthernHemisphere && !this.isBetweenMarchAndOctober || !this.isNorthernHemisphere && this.isBetweenMarchAndOctober;
-      this.setState({isWinter: this.isWinter});
+      const isNorthernHemisphere = latitude > 0 && latitude < 90;
+      const isWinterNow = isNorthernHemisphere && !isFromMarchToOctober || !isNorthernHemisphere && isFromMarchToOctober;
+      this.setState({isWinter: isWinterNow});
     })
     
+    console.log('isWinter ', this.state.isWinter);
+
     return (
       <div>
-        <img src={this.src} style={this.styles.image}/>
-        <h5>Probably it's a {this.season} now :)</h5>
+        <img src={this.state.isWinter ? snowflake : sun} style={styles.image}/>
+        <h5>Probably it's a {this.state.isWinter ? 'winter' : 'summer'} now :)</h5>
       </div>
     );
   }
