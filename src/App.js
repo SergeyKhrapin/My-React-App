@@ -9,67 +9,82 @@ import ToDoListEmpty from './ToDoListEmpty';
 import AddToDoItem from './AddToDoItem';
 import SectionTitle from './SectionTitle';
 
-const App = props => {
-  console.log('App has been rerendered');
+// const todosAndSetToDos = React.useState([]);
+// const inputValueAndSetInputValue = React.useState('');
 
-  let [todos, setToDos] = React.useState([]);
-  let [inputValue, setInputValue] = React.useState('');
+class App extends React.Component {
+  // constructor() {
+  //   super();
+  // }
 
-  const submitNewToDo = event => {
-    event.preventDefault();
-    const val = inputValue.trim();
-    if (val) {
-      setToDos(todos.concat([{
-        id: todos.length + 1,
-        title: val,
-        completed: false,
-      }]));
-      setInputValue('');
-    }
-  };
+  // console.log('App has been rerendered')
 
-  const changeToDoInput = event => {
-    setInputValue(event.target.value);
-  };
+  // todos = todosAndSetToDos[0]
+  // setToDos = todosAndSetToDos[1]
 
-  const doneToDo = id => {
-    setToDos(todos.map(el => {
-      if (el.id === id) {
-        el.completed = !el.completed;
-      }
-      return el;
-    }));
-  };
+  // inputValue = inputValueAndSetInputValue[0]
+  // setInputValue = inputValueAndSetInputValue[1]
 
-  const deleteToDo = id => {
-    setToDos(todos.filter(el => el.id !== id));
-  };
+  // submitNewToDo(event) {
+  //   event.preventDefault();
+  //   const val = this.inputValue.trim();
+  //   if (val) {
+  //     this.setToDos(this.todos.concat([{
+  //       id: this.todos.length + 1,
+  //       title: val,
+  //       completed: false,
+  //     }]));
+  //     this.setInputValue('');
+  //   }
+  // }
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>{props.time.toLocaleTimeString()}</h1>
-      </header>
+  // changeToDoInput(event) {
+  //   this.setInputValue(event.target.value);
+  // }
 
-      <section className="section todo-section">
-        <SectionTitle title="ToDos" />
-        <AddToDoItem value={inputValue} changeToDoInput={changeToDoInput} submitNewToDo={submitNewToDo} />
-        <ToDoContext.Provider value={{doneToDo, deleteToDo}}>
-          { todos.length ? <ToDoList todos={todos} /> : <ToDoListEmpty /> }
-        </ToDoContext.Provider>
-      </section>
+  // doneToDo(id) {
+  //   this.setToDos(this.todos.map(el => {
+  //     if (el.id === id) {
+  //       el.completed = !el.completed;
+  //     }
+  //     return el;
+  //   }));
+  // }
 
-      <section className="section comment-section">
-        <SectionTitle title="Comments" />
-        {[1, 2, 3].map(() => <CommentCard><CommentDetails /></CommentCard>)}
-      </section>
+  // deleteToDo(id) {
+  //   this.setToDos(this.todos.filter(el => el.id !== id));
+  // }
 
-      <section className="section seasons-section">
-        <SectionTitle title="Seasons" />
-        <Seasons />
-      </section>
-    </div>
-  );
-};
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1>{this.props.time.toLocaleTimeString()}</h1>
+        </header>
+
+        {/* <section className="section todo-section">
+          <SectionTitle title="ToDos" />
+          <AddToDoItem value={this.inputValue} changeToDoInput={this.changeToDoInput} submitNewToDo={this.submitNewToDo} />
+          <ToDoContext.Provider value={{doneToDo: this.doneToDo, deleteToDo: this.deleteToDo}}>
+            { this.todos.length ? <ToDoList todos={this.todos} /> : <ToDoListEmpty /> }
+          </ToDoContext.Provider>
+        </section>
+
+        <section className="section comment-section">
+          <SectionTitle title="Comments" />
+          {[1, 2, 3].map(() => <CommentCard><CommentDetails /></CommentCard>)}
+        </section> */}
+
+        <section className="section seasons-section">
+          <SectionTitle title="Seasons" />
+          {/* or we can use this instead :) */}
+          { new SectionTitle({title:'Seasons'}).render() }
+
+          <Seasons />
+        </section>
+      </div>
+    );
+  }
+}
 
 export default App;
