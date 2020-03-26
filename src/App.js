@@ -13,11 +13,10 @@ import SectionTitle from './SectionTitle';
 // const inputValueAndSetInputValue = React.useState('');
 
 class App extends React.Component {
-  // constructor() {
-  //   super();
-  // }
-
-  // console.log('App has been rerendered')
+  constructor() {
+    super();
+    console.log('App has been rendered - constructor()');
+  }
 
   // todos = todosAndSetToDos[0]
   // setToDos = todosAndSetToDos[1]
@@ -56,6 +55,7 @@ class App extends React.Component {
   // }
 
   render() {
+    console.log('App has been rendered - render()');
     return (
       <div className="App">
         <header className="App-header">
