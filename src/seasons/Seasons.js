@@ -6,7 +6,7 @@ class Seasons extends React.Component {
   constructor() {
     super();
     this.state = {
-      isWinter: true,
+      isWinter: null,
       errorMessage: ''
     };
     this.getPosition();
@@ -40,19 +40,29 @@ class Seasons extends React.Component {
   render() {
     const successHTML = (
       <div>
-        <img src={this.state.isWinter ? snowflake : sun} style={this.styles.image}/>
-        <h5>Probably it's a {this.state.isWinter ? 'winter' : 'summer'} now :)</h5>
+        <img src={this.isWinter ? snowflake : sun} style={this.styles.image}/>
+        <h5>Probably it's a {this.isWinter ? 'winter' : 'summer'} now :)</h5>
       </div>
     );
 
     const errorHTML = (
       <h5 style={this.styles.errorMessage}>
-        Hoops :(<br></br>
+        Hoops :(<br />
         {this.state.errorMessage}
       </h5>
     );
 
-    return !this.state.errorMessage ? successHTML : errorHTML;
+    const loadingHTML = (
+      <p>Finding a current location...</p>
+    );
+
+    if (this.state.isWinter !== null && this.state.errorMessage === '') {
+      return successHTML;
+    } else if (this.state.isWinter === null && this.state.errorMessage !== '') {
+      return errorHTML;
+    } else {
+      return loadingHTML;
+    }
   }
 }
 
