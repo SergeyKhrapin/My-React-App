@@ -7,7 +7,7 @@ class Seasons extends React.Component {
         console.log('constructor');
 		super();
 		this.state = {
-			isWinter: null,
+			season: null,
 			errorMessage: ''
         };
 	}
@@ -19,19 +19,22 @@ class Seasons extends React.Component {
 		errorMessage: {
 			color: 'red'
 		}
-	}
+    }
+    
+    getSeason(latitude, month) {
+        const isFromMarchToOctober = month >= 2 && month <= 9;
+        const isNorthernHemisphere = latitude > 0 && latitude < 90;
+        const isWinter = isNorthernHemisphere && !isFromMarchToOctober || !isNorthernHemisphere && isFromMarchToOctober;
+        return isWinter ? 'winter' : 'summer';
+    }
 
 	componentWillMount() {
 		console.log('componentWillMount');
 
 		navigator.geolocation.getCurrentPosition(
 			pos => {
-				const currentMonth = new Date().getMonth();
-				const isFromMarchToOctober = currentMonth >= 2 && currentMonth <= 9;
-				const latitude = pos.coords.latitude;
-				const isNorthernHemisphere = latitude > 0 && latitude < 90;
-				const isWinterNow = isNorthernHemisphere && !isFromMarchToOctober || !isNorthernHemisphere && isFromMarchToOctober;
-				this.setState({isWinter: isWinterNow});
+				const season = this.getSeason(pos.coords.latitude, new Date().getMonth());
+				this.setState({season: season});
 			},
 			err => {
 				this.setState({errorMessage: err.message});
@@ -58,16 +61,16 @@ class Seasons extends React.Component {
 	render() {
 		console.log('render');
 
-		if (this.state.isWinter !== null && this.state.errorMessage === '') {
+		if (this.state.season !== null && this.state.errorMessage === '') {
 			return (
                 <div>
-                    <img src={this.state.isWinter ? snowflake : sun} style={this.styles.image}/>
-                    <h5>Probably it's a {this.state.isWinter ? 'winter' : 'summer'} now :)</h5>
+                    <img src={this.state.season === 'winter' ? snowflake : sun} style={this.styles.image}/>
+                    <h5>Probably it's a {this.state.season} now :)</h5>
                 </div>
             );
 		}
 
-		if (this.state.isWinter === null && this.state.errorMessage !== '') {
+		if (this.state.season === null && this.state.errorMessage !== '') {
 			return (
                 <h5 style={this.styles.errorMessage}>
                     Hoops :(<br />
