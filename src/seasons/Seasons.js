@@ -1,6 +1,7 @@
 import React from 'react';
 import sun from '../sun.png';
 import snowflake from '../snowflake.png';
+import Spinner from '../utilities/Spinner';
 
 class Seasons extends React.Component {
 	constructor() {
@@ -79,7 +80,7 @@ class Seasons extends React.Component {
             );
 		}
 
-		return <p>Finding a current location...</p>;
+		return <Spinner message='Finding a current location...' />;
 	}
 }
 

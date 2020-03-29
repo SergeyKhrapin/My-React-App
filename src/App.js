@@ -7,7 +7,7 @@ import Seasons from './seasons/Seasons';
 import ToDoContext from './context';
 import ToDoListEmpty from './ToDoListEmpty';
 import AddToDoItem from './AddToDoItem';
-import SectionTitle from './SectionTitle';
+import SectionTitle from './utilities/SectionTitle';
 import Stopwatch from './time/Stopwatch';
 
 // const todosAndSetToDos = React.useState([]);
@@ -79,14 +79,11 @@ class App extends React.Component {
 
         <section className="section seasons-section">
           <SectionTitle title="Seasons" />
-          {/* or we can use this instead :) */}
-          { new SectionTitle({title:'Seasons'}).render() }
-
           <Seasons />
         </section>
 
         <section className="section stopwatch-section">
-          <SectionTitle title="Timer" />
+          <SectionTitle title="Stopwatch" />
           <Stopwatch />
         </section>
       </div>
