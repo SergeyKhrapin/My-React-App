@@ -14,8 +14,8 @@ import SectionTitle from './SectionTitle';
 
 class App extends React.Component {
   constructor() {
+    console.log('App.js constructor');
     super();
-    console.log('App has been rendered - constructor()');
   }
 
   // todos = todosAndSetToDos[0]
@@ -55,7 +55,8 @@ class App extends React.Component {
   // }
 
   render() {
-    console.log('App has been rendered - render()');
+    console.log('App.js render');
+
     return (
       <div className="App">
         <header className="App-header">

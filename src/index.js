@@ -5,7 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker'; // @TODO: Learn - promises are used in serviceWorker
 
 const callback = ()=> {
-  console.log('React component has been rendered :)');
+//   console.log('React component has been rendered :)');
 }
 
 ReactDOM.render(<App time={new Date()}/>, document.getElementById('root'), callback);
