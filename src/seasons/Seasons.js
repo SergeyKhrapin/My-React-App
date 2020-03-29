@@ -21,6 +21,15 @@ class Seasons extends React.Component {
         return isWinter ? 'winter' : 'summer';
     }
 
+    getContent() {
+		if (this.state.season !== null && this.state.errorMessage === '') {
+			return <SeasonsDisplaySuccess season={this.state.season} borderColor={this.state.season === 'winter' ? 'blue' : 'yellow'} />;
+		} else if (this.state.season === null && this.state.errorMessage !== '') {
+            return <SeasonsDisplayError errorMessage={this.state.errorMessage} borderColor='red' />;
+        }
+        return <Spinner message='Finding a current location...' borderColor='white' />;
+    }
+
 	componentWillMount() {
 		console.log('componentWillMount');
 
@@ -53,23 +62,7 @@ class Seasons extends React.Component {
 
 	render() {
         console.log('render');
-
-        let seasonHTML = <Spinner message='Finding a current location...' />;
-        let borderColor = 'white';
-
-		if (this.state.season !== null && this.state.errorMessage === '') {
-			seasonHTML = <SeasonsDisplaySuccess season={this.state.season} />;
-            borderColor = this.state.season === 'winter' ? 'blue' : 'yellow';
-		} else if (this.state.season === null && this.state.errorMessage !== '') {
-            seasonHTML = <SeasonsDisplayError errorMessage={this.state.errorMessage} />;
-            borderColor = 'red';
-		}
-
-		return (
-            <Border color={borderColor}>
-                {seasonHTML}
-            </Border>
-        );
+		return <Border>{this.getContent()}</Border>;
 	}
 }
 
