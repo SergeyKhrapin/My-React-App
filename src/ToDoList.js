@@ -11,19 +11,25 @@ const styles = {
   }
 };
 
-const ToDoList = props => {
-  return (
-    <ul className="todo-list" style={styles.list}>
-      {props.todos.map((todo, i) => {
-        return <ToDoItems
-          key={todo.id}
-          todo={todo}
-          index={i + 1}
-        />;
-      })}
-    </ul>
-  )
-};
+class ToDoList extends React.Component {
+   constructor(props) {
+      super(props);
+   }
+
+   render() {
+      return (
+         <ul className="todo-list" style={styles.list}>
+            {this.props.todos.map((todo, i) => {
+            return <ToDoItems
+               key={todo.id}
+               todo={todo}
+               index={i + 1}
+            />;
+            })}
+         </ul>
+      );
+   }
+}
 
 ToDoList.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.object).isRequired

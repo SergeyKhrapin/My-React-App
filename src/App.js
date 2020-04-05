@@ -10,85 +10,89 @@ import AddToDoItem from './AddToDoItem';
 import SectionTitle from './utilities/SectionTitle';
 import Stopwatch from './time/Stopwatch';
 
-// const todosAndSetToDos = React.useState([]);
-// const inputValueAndSetInputValue = React.useState('');
-
 class App extends React.Component {
-  constructor() {
-    console.log('App.js constructor');
-    super();
-  }
+   constructor() {
+      console.log('App.js constructor');
+      super();
+      this.state = {
+         inputValue: '',
+         todos: []
+      };
+      this.submitNewToDo = this.submitNewToDo.bind(this);
+      this.changeToDoInput = this.changeToDoInput.bind(this);
+      this.doneToDo = this.doneToDo.bind(this);
+      this.deleteToDo = this.deleteToDo.bind(this);
+   }
 
-  // todos = todosAndSetToDos[0]
-  // setToDos = todosAndSetToDos[1]
+   submitNewToDo(event) {
+      event.preventDefault();
+      const val = this.state.inputValue.trim();
+      if (val) {
+         const newTodos = this.state.todos.concat([{
+            id: this.state.todos.length + 1,
+            title: val,
+            completed: false,
+         }]);
+         this.setState({
+            inputValue: '',
+            todos: newTodos
+         });
+      }
+   }
 
-  // inputValue = inputValueAndSetInputValue[0]
-  // setInputValue = inputValueAndSetInputValue[1]
+   changeToDoInput(event) {
+      this.setState({ inputValue: event.target.value });
+   }
 
-  // submitNewToDo(event) {
-  //   event.preventDefault();
-  //   const val = this.inputValue.trim();
-  //   if (val) {
-  //     this.setToDos(this.todos.concat([{
-  //       id: this.todos.length + 1,
-  //       title: val,
-  //       completed: false,
-  //     }]));
-  //     this.setInputValue('');
-  //   }
-  // }
+   doneToDo(id) {
+      this.setState({
+         todos: this.state.todos.map(el => {
+            if (el.id === id) {
+               el.completed = !el.completed;
+            }
+            return el;
+         })
+      });
+   }
 
-  // changeToDoInput(event) {
-  //   this.setInputValue(event.target.value);
-  // }
+   deleteToDo(id) {
+      this.setState({ todos: this.state.todos.filter(el => el.id !== id) });
+   }
 
-  // doneToDo(id) {
-  //   this.setToDos(this.todos.map(el => {
-  //     if (el.id === id) {
-  //       el.completed = !el.completed;
-  //     }
-  //     return el;
-  //   }));
-  // }
+   render() {
+      console.log('App.js render');
 
-  // deleteToDo(id) {
-  //   this.setToDos(this.todos.filter(el => el.id !== id));
-  // }
+      return (
+         <div className="App">
+            <header className="App-header">
+               <h1>{this.props.time.toLocaleTimeString()}</h1>
+            </header>
 
-  render() {
-    console.log('App.js render');
+            <section className="section todo-section">
+               <SectionTitle title="ToDos" />
+               <AddToDoItem value={this.state.inputValue} changeToDoInput={this.changeToDoInput} submitNewToDo={this.submitNewToDo} />
+               <ToDoContext.Provider value={{ doneToDo: this.doneToDo, deleteToDo: this.deleteToDo }}>
+                  {this.state.todos.length ? <ToDoList todos={this.state.todos} /> : <ToDoListEmpty />}
+               </ToDoContext.Provider>
+            </section>
 
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1>{this.props.time.toLocaleTimeString()}</h1>
-        </header>
+            <section className="section comment-section">
+               <SectionTitle title="Comments" />
+               {[1, 2, 3].map(() => <CommentCard><CommentDetails /></CommentCard>)}
+            </section>
 
-        {/* <section className="section todo-section">
-          <SectionTitle title="ToDos" />
-          <AddToDoItem value={this.inputValue} changeToDoInput={this.changeToDoInput} submitNewToDo={this.submitNewToDo} />
-          <ToDoContext.Provider value={{doneToDo: this.doneToDo, deleteToDo: this.deleteToDo}}>
-            { this.todos.length ? <ToDoList todos={this.todos} /> : <ToDoListEmpty /> }
-          </ToDoContext.Provider>
-        </section>
+            <section className="section seasons-section">
+               <SectionTitle title="Seasons" />
+               <Seasons />
+            </section>
 
-        <section className="section comment-section">
-          <SectionTitle title="Comments" />
-          {[1, 2, 3].map(() => <CommentCard><CommentDetails /></CommentCard>)}
-        </section> */}
-
-        <section className="section seasons-section">
-          <SectionTitle title="Seasons" />
-          <Seasons />
-        </section>
-
-        <section className="section stopwatch-section">
-          <SectionTitle title="Stopwatch" />
-          <Stopwatch />
-        </section>
-      </div>
-    );
-  }
+            <section className="section stopwatch-section">
+               <SectionTitle title="Stopwatch" />
+               <Stopwatch />
+            </section>
+         </div>
+      );
+   }
 }
 
 export default App;
