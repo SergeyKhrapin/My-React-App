@@ -12,10 +12,6 @@ const styles = {
 };
 
 class ToDoList extends React.Component {
-   constructor(props) {
-      super(props);
-   }
-
    render() {
       return (
          <ul className="todo-list" style={styles.list}>

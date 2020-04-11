@@ -24,3 +24,11 @@ code {
 .done {
   text-decoration: line-through;
 }
+
+.todo-section--control-buttons {
+   display: inline-flex;
+   justify-content: space-between;
+   width: 80%;
+   max-width: 500px;
+   margin-top: 20px;
+}

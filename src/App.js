@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
-import ToDoList from './ToDoList';
+import ToDoList from './todos/ToDoList';
 import CommentDetails from './comments/CommentDetails';
 import CommentCard from './comments/CommentCard';
 import Seasons from './seasons/Seasons';
 import ToDoContext from './context';
-import ToDoListEmpty from './ToDoListEmpty';
-import AddToDoItem from './AddToDoItem';
+import ToDoListEmpty from './todos/ToDoListEmpty';
+import AddToDoItem from './todos/AddToDoItem';
+import DoneAllToDoItem from './todos/DoneAllToDoItem';
+import DeleteAllToDoItem from './todos/DeleteAllToDoItem';
 import SectionTitle from './utilities/SectionTitle';
 import Stopwatch from './time/Stopwatch';
 
@@ -16,12 +18,16 @@ class App extends React.Component {
       super();
       this.state = {
          inputValue: '',
-         todos: []
+         todos: [],
+         areAllToDoDone: false
       };
       this.submitNewToDo = this.submitNewToDo.bind(this);
       this.changeToDoInput = this.changeToDoInput.bind(this);
       this.doneToDo = this.doneToDo.bind(this);
+      this.doneAllToDo = this.doneAllToDo.bind(this);
       this.deleteToDo = this.deleteToDo.bind(this);
+      this.deleteAllToDo = this.deleteAllToDo.bind(this);
+      this.getIniqueID = this.getIniqueID.bind(this);
    }
 
    submitNewToDo(event) {
@@ -29,13 +35,14 @@ class App extends React.Component {
       const val = this.state.inputValue.trim();
       if (val) {
          const newTodos = this.state.todos.concat([{
-            id: this.state.todos.length + 1,
+            id: this.getIniqueID(),
             title: val,
             completed: false,
          }]);
          this.setState({
             inputValue: '',
-            todos: newTodos
+            todos: newTodos,
+            areAllToDoDone: false
          });
       }
    }
@@ -55,13 +62,43 @@ class App extends React.Component {
       });
    }
 
+   doneAllToDo() {
+      this.setState({
+         todos: this.state.todos.map(todo => {
+            todo.completed = this.state.areAllToDoDone ? false : true;
+            return todo;
+         }),
+         areAllToDoDone: !this.state.areAllToDoDone
+      });
+   }
+
    deleteToDo(id) {
-      this.setState({ todos: this.state.todos.filter(el => el.id !== id) });
+      this.setState({
+         todos: this.state.todos.filter(el => el.id !== id)
+      });
+      console.log(this.state.todos);
+   }
+
+   deleteAllToDo() {
+      this.setState({ todos: [] });
+   }
+
+   checkIfAllToDoDone() {
+      return this.state.todos.every(todo => todo.completed);
+   }
+
+   getIniqueID() {
+      return Math.random().toString(36).substr(2, 9);
+   };
+
+   componentDidUpdate() {
+      const areAllToDoDone = this.checkIfAllToDoDone();
+      if (areAllToDoDone !== this.state.areAllToDoDone) {
+         this.setState({ areAllToDoDone: areAllToDoDone });
+      }
    }
 
    render() {
-      console.log('App.js render');
-
       return (
          <div className="App">
             <header className="App-header">
@@ -70,7 +107,18 @@ class App extends React.Component {
 
             <section className="section todo-section">
                <SectionTitle title="ToDos" />
-               <AddToDoItem value={this.state.inputValue} changeToDoInput={this.changeToDoInput} submitNewToDo={this.submitNewToDo} />
+               <AddToDoItem
+                  value={this.state.inputValue}
+                  changeToDoInput={this.changeToDoInput}
+                  submitNewToDo={this.submitNewToDo}
+               />
+               {this.state.todos.length ?
+                  <div className="todo-section--control-buttons">
+                     <DoneAllToDoItem doneAllToDo={this.doneAllToDo} areAllToDoDone={this.state.areAllToDoDone} />
+                     <DeleteAllToDoItem deleteAllToDo={this.deleteAllToDo} />
+                  </div>
+                  : ''}
+
                <ToDoContext.Provider value={{ doneToDo: this.doneToDo, deleteToDo: this.deleteToDo }}>
                   {this.state.todos.length ? <ToDoList todos={this.state.todos} /> : <ToDoListEmpty />}
                </ToDoContext.Provider>
