@@ -27,15 +27,16 @@ class App extends React.Component {
       this.doneAllToDo = this.doneAllToDo.bind(this);
       this.deleteToDo = this.deleteToDo.bind(this);
       this.deleteAllToDo = this.deleteAllToDo.bind(this);
-      this.getIniqueID = this.getIniqueID.bind(this);
+      this.getUniqueID = this.getUniqueID.bind(this);
    }
 
    submitNewToDo(event) {
       event.preventDefault();
+      console.log('submitNewToDo');
       const val = this.state.inputValue.trim();
       if (val) {
          const newTodos = this.state.todos.concat([{
-            id: this.getIniqueID(),
+            id: this.getUniqueID(),
             title: val,
             completed: false,
          }]);
@@ -87,7 +88,7 @@ class App extends React.Component {
       return this.state.todos.every(todo => todo.completed);
    }
 
-   getIniqueID() {
+   getUniqueID() {
       return Math.random().toString(36).substr(2, 9);
    };
 
