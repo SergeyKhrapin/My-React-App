@@ -1,4 +1,5 @@
 import React from 'react';
+import Axios from 'axios';
 import SearchBar from './search/SearchBar';
 import ImageList from './search/ImageList';
 import SectionTitle from './utilities/SectionTitle';
@@ -16,12 +17,12 @@ class Search extends React.Component {
 
    handleSearchForm(e) {
       e.preventDefault();
-      const xhr = new XMLHttpRequest();
       const queryTerm = e.target.elements[0].value;
-      const resourcePath = `https://api.unsplash.com/search/photos/?client_id=${this.clientID}&query=${queryTerm}`;
+      const resourceUrl = 'https://api.unsplash.com/search/photos/';
 
       /* AJAX - start */
-      // xhr.open('GET', resourcePath);
+      // const xhr = new XMLHttpRequest();
+      // xhr.open('GET', `${resourceUrl}?client_id=${this.clientID}&query=${queryTerm}`);
       // xhr.onreadystatechange = () => {
       //    if (xhr.readyState === xhr.DONE) {
       //       if (xhr.status === 200) {
@@ -35,19 +36,34 @@ class Search extends React.Component {
       /* AJAX - end */
 
       /* Fetch - start */
-      const serverResponse = fetch(resourcePath);
-      serverResponse.then(
-         response => {
-            const responseJSON = response.json();
-            responseJSON.then(responseBody => {
-               this.setState({
-                  images: responseBody.results
-               });
-            })
-         }
-      );
+      // const serverResponse = fetch(`${resourceUrl}?client_id=${this.clientID}&query=${queryTerm}`);
+      // serverResponse.then(
+      //    response => {
+      //       const responseJSON = response.json();
+      //       responseJSON.then(responseBody => {
+      //          this.setState({
+      //             images: responseBody.results
+      //          });
+      //       })
+      //    }
+      // );
       /* Fetch - end */
 
+      /* Axios - start */
+      const serverResponse = Axios.get(resourceUrl, {
+         params: {
+            client_id: this.clientID,
+            query: queryTerm
+         }
+      });
+      serverResponse.then(
+         response => {
+            this.setState({
+               images: response.data.results
+            });
+         }
+      );
+      /* Axios - end */
    }
 
    render() {
