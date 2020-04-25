@@ -17,7 +17,8 @@ class Search extends React.Component {
    handleSearchForm(e) {
       e.preventDefault();
       const xhr = new XMLHttpRequest();
-      xhr.open('GET', `https://api.unsplash.com/search/photos/?client_id=${this.clientID}&query=bicycle`);
+      const query = e.target.elements[0].value;
+      xhr.open('GET', `https://api.unsplash.com/search/photos/?client_id=${this.clientID}&query=${query}`);
       xhr.onreadystatechange = () => {
          if (xhr.readyState === xhr.DONE) {
             if (xhr.status === 200) {
@@ -26,8 +27,6 @@ class Search extends React.Component {
                });
             }
          }
-         console.log('onreadystatechange');
-         console.log(xhr);
       }
       xhr.send();
    }
