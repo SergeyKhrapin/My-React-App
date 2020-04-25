@@ -17,18 +17,37 @@ class Search extends React.Component {
    handleSearchForm(e) {
       e.preventDefault();
       const xhr = new XMLHttpRequest();
-      const query = e.target.elements[0].value;
-      xhr.open('GET', `https://api.unsplash.com/search/photos/?client_id=${this.clientID}&query=${query}`);
-      xhr.onreadystatechange = () => {
-         if (xhr.readyState === xhr.DONE) {
-            if (xhr.status === 200) {
+      const queryTerm = e.target.elements[0].value;
+      const resourcePath = `https://api.unsplash.com/search/photos/?client_id=${this.clientID}&query=${queryTerm}`;
+
+      /* AJAX - start */
+      // xhr.open('GET', resourcePath);
+      // xhr.onreadystatechange = () => {
+      //    if (xhr.readyState === xhr.DONE) {
+      //       if (xhr.status === 200) {
+      //          this.setState({
+      //             images: JSON.parse(xhr.response).results
+      //          });
+      //       }
+      //    }
+      // }
+      // xhr.send();
+      /* AJAX - end */
+
+      /* Fetch - start */
+      const serverResponse = fetch(resourcePath);
+      serverResponse.then(
+         response => {
+            const responseJSON = response.json();
+            responseJSON.then(responseBody => {
                this.setState({
-                  images: JSON.parse(xhr.response).results
+                  images: responseBody.results
                });
-            }
+            })
          }
-      }
-      xhr.send();
+      );
+      /* Fetch - end */
+
    }
 
    render() {
