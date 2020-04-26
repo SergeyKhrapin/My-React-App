@@ -1,69 +1,38 @@
 import React from 'react';
-import Axios from 'axios';
 import SearchBar from './search/SearchBar';
 import ImageList from './search/ImageList';
 import SectionTitle from './utilities/SectionTitle';
+import unsplash from './api/unsplash';
 
 class Search extends React.Component {
    constructor() {
       console.log('Search constructor');
       super();
-      this.clientID = 'ItFVv0-zO8RkEUZLoafE4bLKLpQrIPQPJleyOTwyD_4';
       this.state = {
-         images: null
+         images: []
       };
       this.handleSearchForm = this.handleSearchForm.bind(this);
    }
 
-   handleSearchForm(e) {
+   async handleSearchForm(e) {
       e.preventDefault();
-      const queryTerm = e.target.elements[0].value;
-      const resourceUrl = 'https://api.unsplash.com/search/photos/';
 
-      /* AJAX - start */
-      // const xhr = new XMLHttpRequest();
-      // xhr.open('GET', `${resourceUrl}?client_id=${this.clientID}&query=${queryTerm}`);
-      // xhr.onreadystatechange = () => {
-      //    if (xhr.readyState === xhr.DONE) {
-      //       if (xhr.status === 200) {
-      //          this.setState({
-      //             images: JSON.parse(xhr.response).results
-      //          });
-      //       }
-      //    }
-      // }
-      // xhr.send();
-      /* AJAX - end */
+      // Fetch
+      // const serverResponseRaw = await fetch(`https://api.unsplash.com/search/photos?client_id=ItFVv0-zO8RkEUZLoafE4bLKLpQrIPQPJleyOTwyD_4&query=${e.target.elements[0].value}`);
+      // const serverResponse = await serverResponseRaw.json();
+      // this.setState({
+      //    images: serverResponse.results
+      // });
 
-      /* Fetch - start */
-      // const serverResponse = fetch(`${resourceUrl}?client_id=${this.clientID}&query=${queryTerm}`);
-      // serverResponse.then(
-      //    response => {
-      //       const responseJSON = response.json();
-      //       responseJSON.then(responseBody => {
-      //          this.setState({
-      //             images: responseBody.results
-      //          });
-      //       })
-      //    }
-      // );
-      /* Fetch - end */
-
-      /* Axios - start */
-      const serverResponse = Axios.get(resourceUrl, {
+      const serverResponse = await unsplash.get('/search/photos', {
          params: {
-            client_id: this.clientID,
-            query: queryTerm
+            query: e.target.elements[0].value
          }
       });
-      serverResponse.then(
-         response => {
-            this.setState({
-               images: response.data.results
-            });
-         }
-      );
-      /* Axios - end */
+
+      this.setState({
+         images: serverResponse.data.results
+      });
    }
 
    render() {
@@ -73,7 +42,7 @@ class Search extends React.Component {
             <section className="section search-section">
                <SectionTitle title="Search" />
                <SearchBar handleSearchForm={this.handleSearchForm} />
-               {this.state.images && <ImageList images={this.state.images} />}
+               {this.state.images.length ? <ImageList images={this.state.images} /> : ''}
             </section>
          </div>
       );
