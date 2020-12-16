@@ -4,7 +4,7 @@ import Text from './Text';
 import Date from './Date';
 import faker from 'faker';
 
-const CommentDetails = props => {
+const CommentDetails = () => {
   const comment = {
     author: {
         avatarUrl: faker.image.avatar(),
@@ -19,7 +19,6 @@ const CommentDetails = props => {
       <User user={comment.author}/>
       <Text text={comment.text}/>
       <Date date={comment.date}/>
-      {props.children}
     </div>
   );
 }

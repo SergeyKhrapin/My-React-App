@@ -100,6 +100,7 @@ class App extends React.Component {
    }
 
    render() {
+      console.log('render App');
       return (
          <div className="App">
             <header className="App-header">
@@ -107,18 +108,22 @@ class App extends React.Component {
             </header>
 
             <section className="section todo-section">
-               <SectionTitle title="ToDos" />
+               <ToDoContext.Provider value="ToDos"><SectionTitle /></ToDoContext.Provider>
+
                <AddToDoItem
                   value={this.state.inputValue}
                   changeToDoInput={this.changeToDoInput}
                   submitNewToDo={this.submitNewToDo}
                />
-               {this.state.todos.length ?
+
+               {
+                  this.state.todos.length ?
                   <div className="todo-section--control-buttons">
                      <DoneAllToDoItem doneAllToDo={this.doneAllToDo} areAllToDoDone={this.state.areAllToDoDone} />
                      <DeleteAllToDoItem deleteAllToDo={this.deleteAllToDo} />
                   </div>
-                  : ''}
+                  : ''
+               }
 
                <ToDoContext.Provider value={{ doneToDo: this.doneToDo, deleteToDo: this.deleteToDo }}>
                   {this.state.todos.length ? <ToDoList todos={this.state.todos} /> : <ToDoListEmpty />}
@@ -126,17 +131,17 @@ class App extends React.Component {
             </section>
 
             <section className="section comment-section">
-               <SectionTitle title="Comments" />
+               <ToDoContext.Provider value="Comments"><SectionTitle /></ToDoContext.Provider>
                {[1, 2, 3].map(() => <CommentCard><CommentDetails /></CommentCard>)}
             </section>
 
             <section className="section seasons-section">
-               <SectionTitle title="Seasons" />
+               <ToDoContext.Provider value="Seasons"><SectionTitle /></ToDoContext.Provider>
                <Seasons />
             </section>
 
             <section className="section stopwatch-section">
-               <SectionTitle title="Stopwatch" />
+               <ToDoContext.Provider value="Stopwatch"><SectionTitle /></ToDoContext.Provider>
                <Stopwatch />
             </section>
          </div>

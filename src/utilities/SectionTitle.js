@@ -1,7 +1,10 @@
 import React from 'react';
+import SectionTitleContent from './SectionTitleContent';
 
-const SectionTitle = props => {
-    return <h2>{props.title}</h2>;
-};
+const SectionTitle = () => {
+    return (
+        <h2><SectionTitleContent /></h2>
+    );
+}
 
 export default SectionTitle;
