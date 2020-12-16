@@ -11,6 +11,9 @@ import DoneAllToDoItem from './todos/DoneAllToDoItem';
 import DeleteAllToDoItem from './todos/DeleteAllToDoItem';
 import SectionTitle from './utilities/SectionTitle';
 import Stopwatch from './time/Stopwatch';
+import SideBar from './sidebar/SideBar';
+import SideBar1 from './sidebar/SideBar1';
+import SideBar2 from './sidebar/SideBar2';
 
 class App extends React.Component {
    constructor() {
@@ -106,44 +109,47 @@ class App extends React.Component {
             <header className="App-header">
                <h1>{this.props.time.toLocaleTimeString()}</h1>
             </header>
+            <main className="main">
+               <section className="section todo-section">
+                  <ToDoContext.Provider value="ToDos"><SectionTitle /></ToDoContext.Provider>
 
-            <section className="section todo-section">
-               <ToDoContext.Provider value="ToDos"><SectionTitle /></ToDoContext.Provider>
+                  <AddToDoItem
+                     value={this.state.inputValue}
+                     changeToDoInput={this.changeToDoInput}
+                     submitNewToDo={this.submitNewToDo}
+                  />
 
-               <AddToDoItem
-                  value={this.state.inputValue}
-                  changeToDoInput={this.changeToDoInput}
-                  submitNewToDo={this.submitNewToDo}
-               />
+                  {
+                     this.state.todos.length ?
+                     <div className="todo-section--control-buttons">
+                        <DoneAllToDoItem doneAllToDo={this.doneAllToDo} areAllToDoDone={this.state.areAllToDoDone} />
+                        <DeleteAllToDoItem deleteAllToDo={this.deleteAllToDo} />
+                     </div>
+                     : ''
+                  }
 
-               {
-                  this.state.todos.length ?
-                  <div className="todo-section--control-buttons">
-                     <DoneAllToDoItem doneAllToDo={this.doneAllToDo} areAllToDoDone={this.state.areAllToDoDone} />
-                     <DeleteAllToDoItem deleteAllToDo={this.deleteAllToDo} />
-                  </div>
-                  : ''
-               }
+                  <ToDoContext.Provider value={{ doneToDo: this.doneToDo, deleteToDo: this.deleteToDo }}>
+                     {this.state.todos.length ? <ToDoList todos={this.state.todos} /> : <ToDoListEmpty />}
+                  </ToDoContext.Provider>
+               </section>
 
-               <ToDoContext.Provider value={{ doneToDo: this.doneToDo, deleteToDo: this.deleteToDo }}>
-                  {this.state.todos.length ? <ToDoList todos={this.state.todos} /> : <ToDoListEmpty />}
-               </ToDoContext.Provider>
-            </section>
+               <section className="section comment-section">
+                  <ToDoContext.Provider value="Comments"><SectionTitle /></ToDoContext.Provider>
+                  {[1, 2, 3].map(() => <CommentCard><CommentDetails /></CommentCard>)}
+               </section>
 
-            <section className="section comment-section">
-               <ToDoContext.Provider value="Comments"><SectionTitle /></ToDoContext.Provider>
-               {[1, 2, 3].map(() => <CommentCard><CommentDetails /></CommentCard>)}
-            </section>
+               <section className="section seasons-section">
+                  <ToDoContext.Provider value="Seasons"><SectionTitle /></ToDoContext.Provider>
+                  <Seasons />
+               </section>
 
-            <section className="section seasons-section">
-               <ToDoContext.Provider value="Seasons"><SectionTitle /></ToDoContext.Provider>
-               <Seasons />
-            </section>
+               <section className="section stopwatch-section">
+                  <ToDoContext.Provider value="Stopwatch"><SectionTitle /></ToDoContext.Provider>
+                  <Stopwatch />
+               </section>
+            </main>
 
-            <section className="section stopwatch-section">
-               <ToDoContext.Provider value="Stopwatch"><SectionTitle /></ToDoContext.Provider>
-               <Stopwatch />
-            </section>
+            <SideBar top={<SideBar1/>} bottom={<SideBar2/>} />
          </div>
       );
    }

@@ -1,8 +1,12 @@
 .App {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
   text-align: center;
 }
 
 .App-header {
+  flex-basis: 100%;
   background-color: #282c34;
   display: flex;
   flex-direction: column;
