@@ -6,7 +6,6 @@ import unsplash from './api/unsplash';
 
 class Search extends React.Component {
    constructor() {
-      console.log('Search constructor');
       super();
       this.state = {
          images: []
@@ -36,7 +35,6 @@ class Search extends React.Component {
    }
 
    render() {
-      console.log('Search render');
       return(
          <div className="Search">
             <section className="section search-section">

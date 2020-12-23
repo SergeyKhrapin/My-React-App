@@ -6,7 +6,6 @@ class AddToDoItem extends React.Component {
    }
 
    render() {
-      console.log('render AddToDoItem');
       return (
          <form id="todo-form" action="" onSubmit={this.props.submitNewToDo}>
             <input

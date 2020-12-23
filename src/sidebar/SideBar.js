@@ -1,8 +1,6 @@
 import React from 'react';
 
 const SideBar = props => {
-    console.log('props ', props);
-
     return (
         <aside className="sidebar section">
             <div className="sidebar-top">

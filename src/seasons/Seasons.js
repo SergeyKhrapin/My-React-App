@@ -6,7 +6,6 @@ import Border from '../utilities/Border';
 
 class Seasons extends React.Component {
 	constructor() {
-        console.log('constructor');
 		super();
 		this.state = {
 			season: null,
@@ -31,7 +30,7 @@ class Seasons extends React.Component {
     }
 
 	componentWillMount() {
-		console.log('componentWillMount');
+		// console.log('componentWillMount');
 
 		navigator.geolocation.getCurrentPosition(
 			pos => {
@@ -45,23 +44,22 @@ class Seasons extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log('componentDidMount');
+		// console.log('componentDidMount');
 	}
 
 	componentWillUpdate() {
-		console.log('componentWillUpdate');
+		// console.log('componentWillUpdate');
 	}
 
 	componentDidUpdate() {
-		console.log('componentDidUpdate');
+		// console.log('componentDidUpdate');
 	}
 
 	componentWillUnmount() {
-		console.log('componentWillUnmount');
+		// console.log('componentWillUnmount');
 	}
 
 	render() {
-        console.log('render');
 		return <Border>{this.getContent()}</Border>;
 	}
 }

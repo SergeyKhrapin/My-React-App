@@ -1,0 +1,43 @@
+import React from 'react';
+import CommentForm from './CommentForm';
+import CommentList from './CommentList';
+
+class AddComment extends React.Component {
+    constructor() {
+        super();
+
+        this.state = {
+            value: '',
+            comments: []
+        }
+
+        this.onInputChange = (val) => {
+            this.setState({value: val});
+        }
+        
+        this.onInputSubmit = (e) => {
+            e.preventDefault();
+
+            const commentsArray = this.state.comments.concat({
+                message: this.state.value,
+                // id: 
+            });
+
+            this.setState({
+                value: '',
+                comments: commentsArray
+            });
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <CommentForm value={this.state.value} onInputChange={this.onInputChange} onInputSubmit={this.onInputSubmit} />
+                <CommentList comments={this.state.comments} />
+            </div>
+        );
+    }
+}
+
+export default AddComment;

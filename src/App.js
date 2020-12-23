@@ -1,8 +1,10 @@
 import React from 'react';
 import './App.css';
+import AddComment from './comments/functionComponent/AddComment';
+// import AddComment from './comments/classComponent/AddComment';
 import ToDoList from './todos/ToDoList';
-import CommentDetails from './comments/CommentDetails';
-import CommentCard from './comments/CommentCard';
+import CommentDetails from './fakecomments/CommentDetails';
+import CommentCard from './fakecomments/CommentCard';
 import Seasons from './seasons/Seasons';
 import ToDoContext from './context';
 import ToDoListEmpty from './todos/ToDoListEmpty';
@@ -35,7 +37,7 @@ class App extends React.Component {
 
    submitNewToDo(event) {
       event.preventDefault();
-      console.log('submitNewToDo');
+
       const val = this.state.inputValue.trim();
       if (val) {
          const newTodos = this.state.todos.concat([{
@@ -80,7 +82,6 @@ class App extends React.Component {
       this.setState({
          todos: this.state.todos.filter(el => el.id !== id)
       });
-      console.log(this.state.todos);
    }
 
    deleteAllToDo() {
@@ -110,6 +111,11 @@ class App extends React.Component {
                <h1>{this.props.time.toLocaleTimeString()}</h1>
             </header>
             <main className="main">
+               <section className="section comments-section">
+                  <ToDoContext.Provider value="Comments"><SectionTitle /></ToDoContext.Provider>
+                  <AddComment />
+               </section>
+
                <section className="section todo-section">
                   <ToDoContext.Provider value="ToDos"><SectionTitle /></ToDoContext.Provider>
 
@@ -133,9 +139,9 @@ class App extends React.Component {
                   </ToDoContext.Provider>
                </section>
 
-               <section className="section comment-section">
-                  <ToDoContext.Provider value="Comments"><SectionTitle /></ToDoContext.Provider>
-                  {[1, 2, 3].map(() => <CommentCard><CommentDetails /></CommentCard>)}
+               <section className="section fake-comments-section">
+                  <ToDoContext.Provider value="Fake Comments"><SectionTitle /></ToDoContext.Provider>
+                  {[1, 2, 3].map(el => <CommentCard key={el}><CommentDetails /></CommentCard>)}
                </section>
 
                <section className="section seasons-section">
