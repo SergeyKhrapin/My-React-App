@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import AddComment from './comments/functionComponent/AddComment';
-// import AddComment from './comments/classComponent/AddComment';
+// import AddComment from './comments/functionComponent/AddComment';
+import AddComment from './comments/classComponent/AddComment';
 import ToDoList from './todos/ToDoList';
 import CommentDetails from './fakecomments/CommentDetails';
 import CommentCard from './fakecomments/CommentCard';

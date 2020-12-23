@@ -2,6 +2,8 @@ import React from 'react';
 
 class CommentForm extends React.Component {
     render() {
+        console.log('CommentForm', this);
+
         return (
             <form onSubmit={e => this.props.onInputSubmit(e)}>
                 <input

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
 
@@ -6,14 +6,18 @@ const AddComment = () => {
     // the state is only created the first time our component renders !!!
     let [value, setStateValue] = useState('');
     let [comments, setStateComments] = useState([]);
+
+    // Fire when state changing is completed
+    useEffect(() => {
+        console.log('setState completed - ', value);
+    });
     
     function onInputChange(val) {
+        console.log('before setState - ', value);
+
         setStateValue(val);
 
-        setTimeout(() => {
-            console.log('value 2 - ', value);
-            console.log('comments 2 - ', comments);
-        }, 2000);
+        console.log('after setState - ', value);
     }
     
     function onInputSubmit(e) {
@@ -26,6 +30,8 @@ const AddComment = () => {
         setStateValue('');
         setStateComments(commentsArray);
     }
+
+    console.log('render');
 
     return (
         <div>

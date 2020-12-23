@@ -12,7 +12,11 @@ class AddComment extends React.Component {
         }
 
         this.onInputChange = (val) => {
-            this.setState({value: val});
+            console.log('before setState - ', this.state.value);
+
+            this.setState({value: val}, this.setStateCallback);
+
+            console.log('after setState - ', this.state.value);
         }
         
         this.onInputSubmit = (e) => {
@@ -30,7 +34,23 @@ class AddComment extends React.Component {
         }
     }
 
+    // Fire when state changing is completed - option 1
+    componentDidUpdate() {
+        this.handleStateReadiness();
+    }
+    
+    // Fire when state changing is completed - option 2
+    setStateCallback() {
+        this.handleStateReadiness();
+    }
+
+    handleStateReadiness() {
+        console.log('setState completed - ', this.state.value);
+    }
+
     render() {
+        console.log('render');
+
         return (
             <div>
                 <CommentForm value={this.state.value} onInputChange={this.onInputChange} onInputSubmit={this.onInputSubmit} />
