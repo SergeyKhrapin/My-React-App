@@ -8,9 +8,11 @@ const AddComment = () => {
     let [comments, setStateComments] = useState([]);
 
     // Fire when state changing is completed
-    useEffect(() => {
+    useEffect(handleStateReadiness);
+    
+    function handleStateReadiness() {
         console.log('setState completed - ', value);
-    });
+    }
     
     function onInputChange(val) {
         console.log('before setState - ', value);
