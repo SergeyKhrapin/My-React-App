@@ -3,8 +3,9 @@ import User from './User';
 import Text from './Text';
 import Date from './Date';
 import faker from 'faker';
+import { checkPropTypes } from 'prop-types';
 
-const CommentDetails = () => {
+const CommentDetails = props => {
   const comment = {
     author: {
         avatarUrl: faker.image.avatar(),
@@ -15,7 +16,7 @@ const CommentDetails = () => {
   };
 
   return (
-    <div className="comment-details">
+    <div className={props.className}>
       <User user={comment.author}/>
       <Text text={comment.text}/>
       <Date date={comment.date}/>

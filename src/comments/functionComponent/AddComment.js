@@ -36,10 +36,10 @@ const AddComment = () => {
     console.log('render');
 
     return (
-        <div>
+        <>
             <CommentForm value={value} onInputChange={onInputChange} onInputSubmit={onInputSubmit} />
             <CommentList comments={comments} />
-        </div>
+        </>
     );
 }
 

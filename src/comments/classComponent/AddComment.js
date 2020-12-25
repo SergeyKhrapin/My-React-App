@@ -52,10 +52,10 @@ class AddComment extends React.Component {
         console.log('render');
 
         return (
-            <div>
+            <>
                 <CommentForm value={this.state.value} onInputChange={this.onInputChange} onInputSubmit={this.onInputSubmit} />
                 <CommentList comments={this.state.comments} />
-            </div>
+            </>
         );
     }
 }

@@ -141,7 +141,7 @@ class App extends React.Component {
 
                <section className="section fake-comments-section">
                   <ToDoContext.Provider value="Fake Comments"><SectionTitle /></ToDoContext.Provider>
-                  {[1, 2, 3].map(el => <CommentCard key={el}><CommentDetails /></CommentCard>)}
+                  {[1, 2, 3].map(el => <CommentCard key={el} render={className => <CommentDetails className={className}/>}></CommentCard>)}
                </section>
 
                <section className="section seasons-section">

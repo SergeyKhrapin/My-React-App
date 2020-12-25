@@ -18,10 +18,12 @@ const styles = {
   }
 };
 
+const commentDetailsClassName = 'comment-details';
+
 const CommentCard = props => {
   return (
     <div className="comment-card" style={styles.commentCard}>
-      {props.children}
+      {props.render(commentDetailsClassName)}
       <div className="comment-buttons">
         <button style={styles.likeButton}>Like</button>
         <button style={styles.dislikeButton}>Dislike</button>
