@@ -30,8 +30,6 @@ class Seasons extends React.Component {
     }
 
 	componentWillMount() {
-		// console.log('componentWillMount');
-
 		navigator.geolocation.getCurrentPosition(
 			pos => {
 				const season = this.getSeason(pos.coords.latitude, new Date().getMonth());
@@ -43,35 +41,9 @@ class Seasons extends React.Component {
 		)
 	}
 
-	componentDidMount() {
-		// console.log('componentDidMount');
-	}
-
-	componentWillUpdate() {
-		// console.log('componentWillUpdate');
-	}
-
-	componentDidUpdate() {
-		// console.log('componentDidUpdate');
-	}
-
-	componentWillUnmount() {
-		// console.log('componentWillUnmount');
-	}
-
 	render() {
 		return <Border>{this.getContent()}</Border>;
 	}
 }
 
 export default Seasons;
-
-/*
-constructor
-componentWillMount
-render
-componentDidMount
-componentWillUpdate
-render
-componentDidUpdate
-*/

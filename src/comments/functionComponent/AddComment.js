@@ -11,15 +11,15 @@ const AddComment = () => {
     useEffect(handleStateReadiness);
     
     function handleStateReadiness() {
-        console.log('setState completed - ', value);
+        // console.log('setState completed - ', value);
     }
     
     function onInputChange(val) {
-        console.log('before setState - ', value);
+        // console.log('before setState - ', value);
 
         setStateValue(val);
 
-        console.log('after setState - ', value);
+        // console.log('after setState - ', value);
     }
     
     function onInputSubmit(e) {
@@ -32,8 +32,6 @@ const AddComment = () => {
         setStateValue('');
         setStateComments(commentsArray);
     }
-
-    console.log('render');
 
     return (
         <>

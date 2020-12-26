@@ -49,8 +49,6 @@ class AddComment extends React.Component {
     }
 
     render() {
-        console.log('render');
-
         return (
             <>
                 <CommentForm value={this.state.value} onInputChange={this.onInputChange} onInputSubmit={this.onInputSubmit} />

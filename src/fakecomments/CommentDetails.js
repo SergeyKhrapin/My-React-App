@@ -3,12 +3,11 @@ import User from './User';
 import Text from './Text';
 import Date from './Date';
 import faker from 'faker';
-import { checkPropTypes } from 'prop-types';
 
 const CommentDetails = props => {
   const comment = {
     author: {
-        avatarUrl: faker.image.avatar(),
+        // avatarUrl: faker.image.avatar(),
         name: faker.name.firstName() + ' ' + faker.name.lastName()
     },
     text: faker.lorem.sentence(),

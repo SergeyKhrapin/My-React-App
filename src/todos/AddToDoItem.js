@@ -1,11 +1,13 @@
 import React from 'react';
 
 class AddToDoItem extends React.Component {
-   constructor(props) {
-      super(props);
+   handle() {
+      console.log('this1', this);
    }
 
    render() {
+      // console.log('this2', this);
+      // this.handle();
       return (
          <form id="todo-form" action="" onSubmit={this.props.submitNewToDo}>
             <input

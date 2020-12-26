@@ -19,7 +19,7 @@ import SideBar2 from './sidebar/SideBar2';
 
 class App extends React.Component {
    constructor() {
-      console.log('App.js constructor');
+      console.log('App constructor');
       super();
       this.state = {
          inputValue: '',
@@ -27,12 +27,40 @@ class App extends React.Component {
          areAllToDoDone: false
       };
       this.submitNewToDo = this.submitNewToDo.bind(this);
-      this.changeToDoInput = this.changeToDoInput.bind(this);
+      // this.changeToDoInput = this.changeToDoInput.bind(this);
       this.doneToDo = this.doneToDo.bind(this);
       this.doneAllToDo = this.doneAllToDo.bind(this);
       this.deleteToDo = this.deleteToDo.bind(this);
       this.deleteAllToDo = this.deleteAllToDo.bind(this);
       this.getUniqueID = this.getUniqueID.bind(this);
+   }
+
+   componentWillMount() {
+      console.log('componentWillMount');
+   }
+
+   componentDidMount() {
+		console.log('componentDidMount');
+	}
+
+	componentWillUpdate() {
+		console.log('componentWillUpdate');
+	}
+
+	componentDidUpdate() {
+		console.log('componentDidUpdate');
+	}
+
+	componentWillUnmount() {
+		console.log('componentWillUnmount');
+   }
+   
+   componentDidCatch() {
+      console.log('componentDidCatch');
+   }
+
+   static getDerivedStateFromError(error) {
+      console.log('getDerivedStateFromError');
    }
 
    submitNewToDo(event) {
@@ -104,7 +132,7 @@ class App extends React.Component {
    }
 
    render() {
-      console.log('render App');
+      console.log('render');
       return (
          <div className="App">
             <header className="App-header">
