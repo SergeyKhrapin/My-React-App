@@ -3,11 +3,12 @@ import './App.css';
 import AddComment from './comments/functionComponent/AddComment';
 // import AddComment from './comments/classComponent/AddComment';
 import ToDoList from './todos/ToDoList';
+import ToDoListEmpty from './todos/ToDoListEmpty';
+import InfoMessage from './todos/InfoMessage';
 import CommentDetails from './fakecomments/CommentDetails';
 import CommentCard from './fakecomments/CommentCard';
 import Seasons from './seasons/Seasons';
 import ToDoContext from './context';
-import ToDoListEmpty from './todos/ToDoListEmpty';
 import AddToDoItem from './todos/AddToDoItem';
 import DoneAllToDoItem from './todos/DoneAllToDoItem';
 import DeleteAllToDoItem from './todos/DeleteAllToDoItem';
@@ -27,7 +28,7 @@ class App extends React.Component {
          areAllToDoDone: false
       };
       this.submitNewToDo = this.submitNewToDo.bind(this);
-      // this.changeToDoInput = this.changeToDoInput.bind(this);
+      this.changeToDoInput = this.changeToDoInput.bind(this);
       this.doneToDo = this.doneToDo.bind(this);
       this.doneAllToDo = this.doneAllToDo.bind(this);
       this.deleteToDo = this.deleteToDo.bind(this);
@@ -36,43 +37,45 @@ class App extends React.Component {
    }
 
    componentWillMount() {
-      console.log('componentWillMount');
+      // console.log('componentWillMount');
    }
 
    componentDidMount() {
-		console.log('componentDidMount');
+		// console.log('componentDidMount');
 	}
 
 	componentWillUpdate() {
-		console.log('componentWillUpdate');
+		// console.log('componentWillUpdate');
 	}
 
 	componentDidUpdate() {
-		console.log('componentDidUpdate');
+		// console.log('componentDidUpdate');
 	}
 
 	componentWillUnmount() {
-		console.log('componentWillUnmount');
+		// console.log('componentWillUnmount');
    }
    
    componentDidCatch() {
-      console.log('componentDidCatch');
+      // console.log('componentDidCatch');
    }
 
    static getDerivedStateFromError(error) {
-      console.log('getDerivedStateFromError');
+      // console.log('getDerivedStateFromError');
    }
 
    submitNewToDo(event) {
       event.preventDefault();
 
       const val = this.state.inputValue.trim();
+
       if (val) {
          const newTodos = this.state.todos.concat([{
             id: this.getUniqueID(),
             title: val,
             completed: false,
          }]);
+
          this.setState({
             inputValue: '',
             todos: newTodos,
@@ -132,7 +135,7 @@ class App extends React.Component {
    }
 
    render() {
-      console.log('render');
+      // console.log('render');
       return (
          <div className="App">
             <header className="App-header">
@@ -146,6 +149,8 @@ class App extends React.Component {
 
                <section className="section todo-section">
                   <ToDoContext.Provider value="ToDos"><SectionTitle /></ToDoContext.Provider>
+
+                  <div id="info"></div>
 
                   <AddToDoItem
                      value={this.state.inputValue}
@@ -163,7 +168,7 @@ class App extends React.Component {
                   }
 
                   <ToDoContext.Provider value={{ doneToDo: this.doneToDo, deleteToDo: this.deleteToDo }}>
-                     {this.state.todos.length ? <ToDoList todos={this.state.todos} /> : <ToDoListEmpty />}
+                     {this.state.todos.length ? <ToDoList todos={this.state.todos}><InfoMessage todoQuantity={this.state.todos.length} /></ToDoList> : <ToDoListEmpty />}
                   </ToDoContext.Provider>
                </section>
 

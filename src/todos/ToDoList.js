@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import ToDoItems from './ToDoItems';
 import PropTypes from 'prop-types';
 
@@ -14,15 +15,12 @@ const styles = {
 class ToDoList extends React.Component {
    render() {
       return (
-         <ul className="todo-list" style={styles.list}>
-            {this.props.todos.map((todo, i) => {
-            return <ToDoItems
-               key={todo.id}
-               todo={todo}
-               index={i + 1}
-            />;
-            })}
-         </ul>
+         <>
+            <ul className="todo-list" style={styles.list}>
+               {this.props.todos.map((todo, i) => <ToDoItems key={todo.id} todo={todo} index={i + 1} />)}
+            </ul>
+            {ReactDOM.createPortal(this.props.children, document.getElementById('info'))}
+         </>
       );
    }
 }
