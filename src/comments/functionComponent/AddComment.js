@@ -14,28 +14,38 @@ const AddComment = () => {
         // console.log('setState completed - ', value);
     }
     
-    function onInputChange(val) {
+    function onTextareaChange(event) {
         // console.log('before setState - ', value);
 
-        setStateValue(val);
+        const val = event.currentTarget.value;
+
+        setStateValue(val.trim() ? val : ''); // handle cases when ENTER (SHIFT + ENTER) or SPACE is pressed
 
         // console.log('after setState - ', value);
     }
+
+    function onTextareaKeypress(event) {
+        if (event.charCode == 13 && !event.shiftKey) {
+            event.target.form.requestSubmit(); // trigger onSubmit (onTextareaSubmit) method
+        }
+    }
     
-    function onInputSubmit(e) {
-        e.preventDefault();
-
-        const commentsArray = comments.concat({
-            message: value
-        });
-
-        setStateValue('');
-        setStateComments(commentsArray);
+    function onTextareaSubmit(event) {
+        event.preventDefault();
+        
+        if (value.trim()) {
+            const commentsArray = comments.concat({
+                message: value
+            });
+    
+            setStateValue('');
+            setStateComments(commentsArray);
+        }
     }
 
     return (
         <>
-            <CommentForm value={value} onInputChange={onInputChange} onInputSubmit={onInputSubmit} />
+            <CommentForm value={value} onTextareaChange={onTextareaChange} onTextareaKeypress={onTextareaKeypress} onTextareaSubmit={onTextareaSubmit} />
             <CommentList comments={comments} />
         </>
     );

@@ -1,12 +1,22 @@
 import React from 'react';
 
+const styles= {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+};
+
 const CommentForm = props => {
     return (
-        <form onSubmit={e => props.onInputSubmit(e)}>
-            <input
+        <form onSubmit={props.onTextareaSubmit} style={styles}>
+            <textarea
                 value={props.value}
-                onChange={e => props.onInputChange(e.currentTarget.value)}
-                placeholder="What's on your mind?"/>
+                onChange={props.onTextareaChange}
+                onKeyPress={props.onTextareaKeypress}
+                placeholder="What's on your mind?"
+                autoFocus>
+            </textarea>
+            <input type="submit" />
         </form>
     );
 }
