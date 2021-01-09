@@ -10,8 +10,7 @@ import CommentCard from './fakecomments/CommentCard';
 import Seasons from './seasons/Seasons';
 import ToDoContext from './context';
 import AddToDoItem from './todos/AddToDoItem';
-import DoneAllToDoItem from './todos/DoneAllToDoItem';
-import DeleteAllToDoItem from './todos/DeleteAllToDoItem';
+import ToDoControls from './todos/ToDoControls';
 import SectionTitle from './utilities/SectionTitle';
 import Stopwatch from './time/Stopwatch';
 import SideBar from './sidebar/SideBar';
@@ -22,6 +21,7 @@ class App extends React.Component {
    constructor() {
       console.log('App constructor');
       super();
+      console.log(this);
       this.state = {
          inputValue: '',
          todos: [],
@@ -136,6 +136,15 @@ class App extends React.Component {
 
    render() {
       // console.log('render');
+
+      const todosLength = this.state.todos.length || '';
+
+      const toDoControls = {
+         doneAllToDo: this.doneAllToDo,
+         areAllToDoDone: this.state.areAllToDoDone,
+         deleteAllToDo: this.deleteAllToDo
+      };
+
       return (
          <div className="App">
             <header className="App-header">
@@ -158,17 +167,10 @@ class App extends React.Component {
                      submitNewToDo={this.submitNewToDo}
                   />
 
-                  {
-                     this.state.todos.length ?
-                     <div className="todo-section--control-buttons">
-                        <DoneAllToDoItem doneAllToDo={this.doneAllToDo} areAllToDoDone={this.state.areAllToDoDone} />
-                        <DeleteAllToDoItem deleteAllToDo={this.deleteAllToDo} />
-                     </div>
-                     : ''
-                  }
+                  { todosLength && <ToDoContext.Provider value={toDoControls}><ToDoControls /></ToDoContext.Provider> }
 
                   <ToDoContext.Provider value={{ doneToDo: this.doneToDo, deleteToDo: this.deleteToDo }}>
-                     {this.state.todos.length ? <ToDoList todos={this.state.todos}><InfoMessage todoQuantity={this.state.todos.length} /></ToDoList> : <ToDoListEmpty />}
+                     {todosLength ? <ToDoList todos={this.state.todos}><InfoMessage todoQuantity={todosLength} /></ToDoList> : <ToDoListEmpty />}
                   </ToDoContext.Provider>
                </section>
 
