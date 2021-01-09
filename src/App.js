@@ -16,6 +16,7 @@ import Stopwatch from './time/Stopwatch';
 import SideBar from './sidebar/SideBar';
 import SideBar1 from './sidebar/SideBar1';
 import SideBar2 from './sidebar/SideBar2';
+import todoConstants from './constants/todo';
 
 class App extends React.Component {
    constructor() {
@@ -25,14 +26,15 @@ class App extends React.Component {
       this.state = {
          inputValue: '',
          todos: [],
-         areAllToDoDone: false
+         areAllToDoDone: false,
+         toDoTypeToDelete: 1
       };
       this.submitNewToDo = this.submitNewToDo.bind(this);
       this.changeToDoInput = this.changeToDoInput.bind(this);
       this.doneToDo = this.doneToDo.bind(this);
       this.doneAllToDo = this.doneAllToDo.bind(this);
       this.deleteToDo = this.deleteToDo.bind(this);
-      this.deleteAllToDo = this.deleteAllToDo.bind(this);
+      this.deleteToDoItems = this.deleteToDoItems.bind(this);
       this.getUniqueID = this.getUniqueID.bind(this);
    }
 
@@ -115,8 +117,22 @@ class App extends React.Component {
       });
    }
 
-   deleteAllToDo() {
-      this.setState({ todos: [] });
+   deleteToDoItems(event) {
+      const val = event.target.value;
+      let todos = []; // val == todoConstants.deleteAllToDos
+      
+      if (val == todoConstants.deleteCompletedToDos) {
+         todos = this.state.todos.filter(todo => !todo.completed);
+      }
+
+      if (val == todoConstants.deleteUncompletedToDos) {
+         todos = this.state.todos.filter(todo => todo.completed);
+      }
+      
+      this.setState({
+         todos: todos,
+         toDoTypeToDelete: val
+      });
    }
 
    checkIfAllToDoDone() {
@@ -142,7 +158,8 @@ class App extends React.Component {
       const toDoControls = {
          doneAllToDo: this.doneAllToDo,
          areAllToDoDone: this.state.areAllToDoDone,
-         deleteAllToDo: this.deleteAllToDo
+         deleteToDoItems: this.deleteToDoItems,
+         toDoTypeToDelete: this.state.toDoTypeToDelete
       };
 
       return (

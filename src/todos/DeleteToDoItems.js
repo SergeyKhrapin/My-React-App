@@ -7,7 +7,11 @@ const DeleteToDoItems = () => {
 
    return (
       <div>
-         <button onClick={context.deleteAllToDo}>{todoConstants.deleteAllToDos}</button>
+         <select value={context.toDoTypeToDelete} onChange={context.deleteToDoItems}>
+            <option>{todoConstants.deleteAllToDos}</option>
+            <option>{todoConstants.deleteCompletedToDos}</option>
+            <option>{todoConstants.deleteUncompletedToDos}</option>
+         </select>
       </div>
    );
 }
