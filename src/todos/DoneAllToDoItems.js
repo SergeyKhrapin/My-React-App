@@ -1,5 +1,6 @@
 import React from 'react';
 import ToDoContext from '../context';
+import todoConstants from '../constants/todo';
 
 const DoneAllToDoItems = () => {
    const context = React.useContext(ToDoContext);
@@ -7,7 +8,7 @@ const DoneAllToDoItems = () => {
    return (
       <div>
          <input id="doneAllToDo" type="checkbox" onChange={context.doneAllToDo} checked={context.areAllToDoDone}  />
-         <label htmlFor="doneAllToDo">{context.areAllToDoDone ? 'Undo all' : 'Done all'}</label>
+         <label htmlFor="doneAllToDo">{context.areAllToDoDone ? todoConstants.undoAllToDos : todoConstants.doneAllToDos}</label>
       </div>
    );
 }
