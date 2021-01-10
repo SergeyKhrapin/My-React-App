@@ -18,24 +18,21 @@ const AddComment = () => {
     let [value, setStateValue] = useState(() => setInitialValue());
 
     let [comments, setStateComments] = useState([]);
-
-    // Fire when state changing is completed
-    useEffect(handleStateReadiness);
     
     function handleStateReadiness() {
-        // console.log('setState completed - ', value);
+        console.log('render');
     }
     
     function onTextareaChange(event) {
         // console.log('before setState - ', value);
-
+        
         const val = event.currentTarget.value;
-
+        
         setStateValue(val.trim() ? val : ''); // handle cases when ENTER (SHIFT + ENTER) or SPACE is pressed
-
+        
         // console.log('after setState - ', value);
     }
-
+    
     function onTextareaKeypress(event) {
         if (event.charCode == 13 && !event.shiftKey) {
             event.target.form.requestSubmit(); // trigger onSubmit (onTextareaSubmit) method
@@ -49,11 +46,15 @@ const AddComment = () => {
             const commentsArray = comments.concat({
                 message: value
             });
-    
+            
             setStateValue('');
             setStateComments(commentsArray);
         }
     }
+    
+    // Fire when rendering is completed
+    // Only if comments variable is changed (when comment is submited)
+    useEffect(handleStateReadiness, [comments]);
 
     return (
         <>
