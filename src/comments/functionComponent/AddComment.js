@@ -3,8 +3,20 @@ import CommentForm from './CommentForm';
 import CommentList from './CommentList';
 
 const AddComment = () => {
-    // the state is only created the first time our component renders !!!
-    let [value, setStateValue] = useState('');
+    function setInitialValue() {
+        console.log('Some expensive calculation');
+        return '';
+    }
+
+    // the state is only created the first time our component renders
+    // but useState will execute each time on re-renders
+    // but the argument inside useState() is disregarded in subsequent renders
+    // let [value, setStateValue] = useState(setInitialValue());
+
+    // Best practice
+    // setInitialValue() is executed only once on the first render
+    let [value, setStateValue] = useState(() => setInitialValue());
+
     let [comments, setStateComments] = useState([]);
 
     // Fire when state changing is completed
