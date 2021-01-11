@@ -22,7 +22,6 @@ class App extends React.Component {
    constructor() {
       console.log('App constructor');
       super();
-      console.log(this);
       this.state = {
          inputValue: '',
          todos: [],

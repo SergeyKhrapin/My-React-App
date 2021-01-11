@@ -12,11 +12,11 @@ const AddComment = () => {
     // but useState will execute each time on re-renders
     // but the argument inside useState() is disregarded in subsequent renders
     // let [value, setStateValue] = useState(setInitialValue());
-
+    
     // Best practice
     // setInitialValue() is executed only once on the first render
     let [value, setStateValue] = useState(() => setInitialValue());
-
+    
     let [comments, setStateComments] = useState([]);
     
     function handleStateReadiness() {
@@ -50,11 +50,30 @@ const AddComment = () => {
             setStateValue('');
             setStateComments(commentsArray);
         }
+
+        // Try to remove mouseleave listener when comment is submited
+        // But it doesn't work!
+        // window.removeEventListener('mousemove', mouseMoveHandler);
     }
     
     // Fire when rendering is completed
     // Only if comments variable is changed (when comment is submited)
-    useEffect(handleStateReadiness, [comments]);
+    useEffect(() => {
+        handleStateReadiness();
+        // Remove mouseleave listener when comment is submited
+        // Note: we should use return
+        return () => {
+            window.removeEventListener('mousemove', mouseMoveHandler);
+        };
+    }, [comments]);
+
+    function mouseMoveHandler() {
+        console.log('move');
+    }
+
+    useEffect(() => {
+        window.addEventListener('mousemove', mouseMoveHandler); // Executed only once (on first rendering) because the second parameter is an empty array
+    }, []);
 
     return (
         <>
