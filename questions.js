@@ -83,3 +83,57 @@ setState(prevState => {
 useEffect(() => {
     console.log('It will be displayed only after first rendering');
 }, []);
+
+
+// 4.
+// The event listener should be removed when a new comment submitted. How to do that?
+// In other words, where the code window.removeEventListener('mousemove', mouseMoveHandler) should be placed?
+
+function AddComment() {
+    let [value, setStateValue] = useState('');
+    let [comments, setStateComments] = useState([]);
+    
+    function handleRerendering() { console.log('render'); }
+
+    function onTextareaChange(event) { setStateValue(event.currentTarget.value); }
+    
+    function onTextareaSubmit(event) {
+        event.preventDefault();
+        const commentsArray = comments.concat(value);
+        setStateValue('');
+        setStateComments(commentsArray);
+    }
+
+    useEffect(() => {
+        handleRerendering();
+    }, [comments]);
+
+    function mouseMoveHandler() { console.log('move'); }
+
+    useEffect(() => {
+        window.addEventListener('mousemove', mouseMoveHandler);
+    }, []);
+
+    return (
+        <form onSubmit={onTextareaSubmit}>
+            <textarea onChange={onTextareaChange} value={value}></textarea>
+            <input type="submit" />
+        </form>
+    );
+}
+
+// Answer
+useEffect(() => {
+    handleRerendering();
+    return () => {
+        window.removeEventListener('mousemove', mouseMoveHandler);
+    };
+}, [comments]);
+
+// It doesn't work here!
+function onTextareaSubmit(event) {
+    // textarea submit logic
+    window.removeEventListener('mousemove', mouseMoveHandler);
+}
+
+// 5.
