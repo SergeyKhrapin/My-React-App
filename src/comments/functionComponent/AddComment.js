@@ -19,18 +19,13 @@ const AddComment = () => {
     
     let [comments, setStateComments] = useState([]);
     
-    function handleStateReadiness() {
+    function handleRenderingCompletion() {
         console.log('render');
     }
     
     function onTextareaChange(event) {
-        // console.log('before setState - ', value);
-        
         const val = event.currentTarget.value;
-        
         setStateValue(val.trim() ? val : ''); // handle cases when ENTER (SHIFT + ENTER) or SPACE is pressed
-        
-        // console.log('after setState - ', value);
     }
     
     function onTextareaKeypress(event) {
@@ -51,15 +46,14 @@ const AddComment = () => {
             setStateComments(commentsArray);
         }
 
-        // Try to remove mouseleave listener when comment is submited
-        // But it doesn't work!
+        // It doesn't work here!
         // window.removeEventListener('mousemove', mouseMoveHandler);
     }
     
     // Fire when rendering is completed
     // Only if comments variable is changed (when comment is submited)
     useEffect(() => {
-        handleStateReadiness();
+        handleRenderingCompletion();
         // Remove mouseleave listener when comment is submited
         // Note: we should use return
         return () => {
