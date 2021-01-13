@@ -71,7 +71,11 @@ const AddComment = () => {
 
     return (
         <>
-            <CommentForm value={value} onTextareaChange={onTextareaChange} onTextareaKeypress={onTextareaKeypress} onTextareaSubmit={onTextareaSubmit} />
+            <CommentForm
+                value={value}
+                onTextareaChange={onTextareaChange}
+                onTextareaKeypress={onTextareaKeypress}
+                onTextareaSubmit={onTextareaSubmit} />
             <CommentList comments={comments} />
         </>
     );

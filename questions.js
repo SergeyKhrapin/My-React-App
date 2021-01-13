@@ -137,3 +137,51 @@ function onTextareaSubmit(event) {
 }
 
 // 5.
+// We want to show a numbers of rerenderings after each input type. How can we do that?
+// Condition: We shouldn't do that inside handleChange method.
+
+function SomeComponent() {
+    let [value, setValue] = useState('');
+    // let [renderingCounter, setRenderingCounter] = useState(0); // 1
+
+    function handleChange(e) {
+        setValue(e.target.value);
+        // setRenderingCounter(++renderingCounter); // 2
+    }
+
+    // In fact, we can do steps 1 and 2, but we can't do so according to the condition of this task :)
+    
+    return (
+        <>
+            <h1>Number of rerenderings - {}</h1>
+            <input onChange={handleChange} value={value} />
+        </>
+    );
+}
+
+// Answer
+// We can use useRef().
+function SomeComponent() {
+    let [value, setValue] = useState('');
+    let renderingCounter = useRef(0);
+
+    function handleChange(e) {
+        setValue(e.target.value);
+    }
+
+    useEffect(() => {
+        renderingCounter.current++;
+    });
+    // In fact, we can don't use useEffect above. Just renderingCounter.current++;
+    
+    return (
+        <>
+            <h1>Number of rerenderings - {renderingCounter.current}</h1>
+            <input onChange={handleChange} value={value} />
+        </>
+    );
+}
+
+
+// 6.
+//
