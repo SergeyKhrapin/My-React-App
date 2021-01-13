@@ -7,13 +7,12 @@ const styles= {
 };
 
 const CommentForm = props => {
-    let renderCount = useRef(0); // return an objet {current: 0}
-    // renderCount.current doesn't become 0 after each rerenderings, because useRef gives us the same ref object on every render
+    let previousValue = useRef(''); // return an objet {current: ''}
+    // previousValue.current doesn't become '' after each rerenderings, because useRef gives us the same ref object on every render
 
     useEffect(() => {
-        renderCount.current++;
+        previousValue.current = props.value;
     });
-    // In fact, we can don't use useEffect above. Just renderCount.current++;
 
     function handleButtonClick() {
         textarea.current.focus();
@@ -23,7 +22,7 @@ const CommentForm = props => {
 
     return (
         <>
-            <h3>Number of rerenderings - {renderCount.current}</h3>
+            <h3>A previous value - {previousValue.current}</h3>
             <form onSubmit={props.onTextareaSubmit} style={styles}>
                 <textarea
                     ref={textarea}
