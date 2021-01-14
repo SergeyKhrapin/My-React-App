@@ -7,13 +7,6 @@ const styles= {
 };
 
 const CommentForm = props => {
-    let previousValue = useRef(''); // return an objet {current: ''}
-    // previousValue.current doesn't become '' after each rerenderings, because useRef gives us the same ref object on every render
-
-    useEffect(() => {
-        previousValue.current = props.value;
-    });
-
     function handleButtonClick() {
         textarea.current.focus();
     }
@@ -22,7 +15,6 @@ const CommentForm = props => {
 
     return (
         <>
-            <h3>A previous value - {previousValue.current}</h3>
             <form onSubmit={props.onTextareaSubmit} style={styles}>
                 <textarea
                     ref={textarea}
