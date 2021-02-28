@@ -71,6 +71,7 @@ const AddComment = () => {
 
     return (
         <>
+            <h3>{Date.now()}</h3>
             <CommentForm
                 value={value}
                 onTextareaChange={onTextareaChange}

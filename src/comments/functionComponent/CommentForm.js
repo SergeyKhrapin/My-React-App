@@ -9,6 +9,7 @@ const styles= {
 const CommentForm = props => {
     return (
         <>
+            <h3>{Date.now()}</h3>
             <form onSubmit={props.onTextareaSubmit} style={styles}>
                 <textarea
                     value={props.value}

@@ -2,214 +2,94 @@ import React from 'react';
 import './App.css';
 import AddComment from './comments/functionComponent/AddComment';
 // import AddComment from './comments/classComponent/AddComment';
-import ToDoList from './todos/ToDoList';
-import ToDoListEmpty from './todos/ToDoListEmpty';
-import InfoMessage from './todos/InfoMessage';
+import ToDoContext from './context';
 import CommentDetails from './fakecomments/CommentDetails';
 import CommentCard from './fakecomments/CommentCard';
 import Seasons from './seasons/Seasons';
-import ToDoContext from './context';
 import AddToDoItem from './todos/AddToDoItem';
-import ToDoControls from './todos/ToDoControls';
 import SectionTitle from './utilities/SectionTitle';
 import Stopwatch from './time/Stopwatch';
 import SideBar from './sidebar/SideBar';
 import SideBar1 from './sidebar/SideBar1';
 import SideBar2 from './sidebar/SideBar2';
-import todoConstants from './constants/todo';
 
 class App extends React.Component {
-   constructor() {
-      console.log('App constructor');
-      super();
-      this.state = {
-         inputValue: '',
-         todos: [],
-         areAllToDoDone: false,
-         toDoTypeToDelete: 1
-      };
-      this.submitNewToDo = this.submitNewToDo.bind(this);
-      this.changeToDoInput = this.changeToDoInput.bind(this);
-      this.doneToDo = this.doneToDo.bind(this);
-      this.doneAllToDo = this.doneAllToDo.bind(this);
-      this.deleteToDo = this.deleteToDo.bind(this);
-      this.deleteToDoItems = this.deleteToDoItems.bind(this);
-      this.getUniqueID = this.getUniqueID.bind(this);
-   }
+    constructor() {
+        super();
+        console.log('App constructor');
+    }
 
-   componentWillMount() {
-      // console.log('componentWillMount');
-   }
+    componentWillMount() {
+        // console.log('componentWillMount');
+    }
 
-   componentDidMount() {
-		// console.log('componentDidMount');
-	}
+    componentDidMount() {
+        // console.log('componentDidMount');
+    }
 
-	componentWillUpdate() {
-		// console.log('componentWillUpdate');
-	}
+    componentWillUpdate() {
+        // console.log('componentWillUpdate');
+    }
 
-	componentDidUpdate() {
-		// console.log('componentDidUpdate');
-	}
+    componentDidUpdate() {
+        // console.log('componentDidUpdate');
+    }
 
-	componentWillUnmount() {
-		// console.log('componentWillUnmount');
-   }
-   
-   componentDidCatch() {
-      // console.log('componentDidCatch');
-   }
+    componentWillUnmount() {
+        // console.log('componentWillUnmount');
+    }
 
-   static getDerivedStateFromError(error) {
-      // console.log('getDerivedStateFromError');
-   }
+    componentDidCatch() {
+        // console.log('componentDidCatch');
+    }
 
-   submitNewToDo(event) {
-      event.preventDefault();
+    static getDerivedStateFromError(error) {
+        // console.log('getDerivedStateFromError');
+    }
 
-      const val = this.state.inputValue.trim();
+    render() {
+        // console.log('render');
 
-      if (val) {
-         const newTodos = this.state.todos.concat([{
-            id: this.getUniqueID(),
-            title: val,
-            completed: false,
-         }]);
+        return (
+            <div className="App">
+                <header className="App-header">
+                    <h1>React learning</h1>
+                </header>
+                <main className="main">
+                    <section className="section comments-section">
+                        <ToDoContext.Provider value="Comments"><SectionTitle /></ToDoContext.Provider>
+                        <AddComment />
+                    </section>
 
-         this.setState({
-            inputValue: '',
-            todos: newTodos,
-            areAllToDoDone: false
-         });
-      }
-   }
+                    <section className="section todo-section">
+                        <ToDoContext.Provider value="ToDos"><SectionTitle /></ToDoContext.Provider>
 
-   changeToDoInput(event) {
-      this.setState({ inputValue: event.target.value });
-   }
+                        <div id="info"></div>
 
-   doneToDo(id) {
-      this.setState({
-         todos: this.state.todos.map(el => {
-            if (el.id === id) {
-               el.completed = !el.completed;
-            }
-            return el;
-         })
-      });
-   }
+                        <AddToDoItem />
+                    </section>
 
-   doneAllToDo() {
-      this.setState({
-         todos: this.state.todos.map(todo => {
-            todo.completed = this.state.areAllToDoDone ? false : true;
-            return todo;
-         }),
-         areAllToDoDone: !this.state.areAllToDoDone
-      });
-   }
+                    <section className="section fake-comments-section">
+                        <ToDoContext.Provider value="Fake Comments"><SectionTitle /></ToDoContext.Provider>
+                        {[1, 2, 3].map(el => <CommentCard key={el} render={className => <CommentDetails className={className} />}></CommentCard>)}
+                    </section>
 
-   deleteToDo(id) {
-      this.setState({
-         todos: this.state.todos.filter(el => el.id !== id)
-      });
-   }
+                    <section className="section seasons-section">
+                        <ToDoContext.Provider value="Seasons"><SectionTitle /></ToDoContext.Provider>
+                        <Seasons />
+                    </section>
 
-   deleteToDoItems(event) {
-      const val = event.target.value;
-      let todos = []; // val == todoConstants.deleteAllToDos
-      
-      if (val == todoConstants.deleteCompletedToDos) {
-         todos = this.state.todos.filter(todo => !todo.completed);
-      }
+                    <section className="section stopwatch-section">
+                        <ToDoContext.Provider value="Stopwatch"><SectionTitle /></ToDoContext.Provider>
+                        <Stopwatch />
+                    </section>
+                </main>
 
-      if (val == todoConstants.deleteUncompletedToDos) {
-         todos = this.state.todos.filter(todo => todo.completed);
-      }
-      
-      this.setState({
-         todos: todos,
-         toDoTypeToDelete: val
-      });
-   }
-
-   checkIfAllToDoDone() {
-      return this.state.todos.every(todo => todo.completed);
-   }
-
-   getUniqueID() {
-      return Math.random().toString(36).substr(2, 9);
-   };
-
-   componentDidUpdate() {
-      const areAllToDoDone = this.checkIfAllToDoDone();
-      if (areAllToDoDone !== this.state.areAllToDoDone) {
-         this.setState({ areAllToDoDone: areAllToDoDone });
-      }
-   }
-
-   render() {
-      // console.log('render');
-
-      const todosLength = this.state.todos.length || '';
-
-      const toDoControls = {
-         doneAllToDo: this.doneAllToDo,
-         areAllToDoDone: this.state.areAllToDoDone,
-         deleteToDoItems: this.deleteToDoItems,
-         toDoTypeToDelete: this.state.toDoTypeToDelete
-      };
-
-      return (
-         <div className="App">
-            <header className="App-header">
-               <h1>{this.props.time.toLocaleTimeString()}</h1>
-            </header>
-            <main className="main">
-               <section className="section comments-section">
-                  <ToDoContext.Provider value="Comments"><SectionTitle /></ToDoContext.Provider>
-                  <AddComment />
-               </section>
-
-               <section className="section todo-section">
-                  <ToDoContext.Provider value="ToDos"><SectionTitle /></ToDoContext.Provider>
-
-                  <div id="info"></div>
-
-                  <AddToDoItem
-                     value={this.state.inputValue}
-                     changeToDoInput={this.changeToDoInput}
-                     submitNewToDo={this.submitNewToDo}
-                  />
-
-                  { todosLength && <ToDoContext.Provider value={toDoControls}><ToDoControls /></ToDoContext.Provider> }
-
-                  <ToDoContext.Provider value={{ doneToDo: this.doneToDo, deleteToDo: this.deleteToDo }}>
-                     {todosLength ? <ToDoList todos={this.state.todos}><InfoMessage todoQuantity={todosLength} /></ToDoList> : <ToDoListEmpty />}
-                  </ToDoContext.Provider>
-               </section>
-
-               <section className="section fake-comments-section">
-                  <ToDoContext.Provider value="Fake Comments"><SectionTitle /></ToDoContext.Provider>
-                  {[1, 2, 3].map(el => <CommentCard key={el} render={className => <CommentDetails className={className}/>}></CommentCard>)}
-               </section>
-
-               <section className="section seasons-section">
-                  <ToDoContext.Provider value="Seasons"><SectionTitle /></ToDoContext.Provider>
-                  <Seasons />
-               </section>
-
-               <section className="section stopwatch-section">
-                  <ToDoContext.Provider value="Stopwatch"><SectionTitle /></ToDoContext.Provider>
-                  <Stopwatch />
-               </section>
-            </main>
-
-            <SideBar top={<SideBar1/>} bottom={<SideBar2/>} />
-         </div>
-      );
-   }
+                <SideBar top={<SideBar1 />} bottom={<SideBar2 />} />
+            </div>
+        );
+    }
 }
 
 export default App;
+

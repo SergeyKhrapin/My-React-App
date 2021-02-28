@@ -6,7 +6,12 @@ const CommentList = (props) => {
         return <CommentCard key={i} comment={comment} />;
     });
 
-    return <ul>{comments}</ul>
+    return (
+        <>
+            <h3>{Date.now()}</h3>
+            <ul>{comments}</ul>
+        </>
+    );
 }
 
 export default CommentList;
