@@ -24,6 +24,30 @@ class AddToDoItem extends React.Component {
         this.getUniqueID = this.getUniqueID.bind(this);
     }
 
+    componentWillMount() {
+        console.log('componentWillMount');
+    }
+
+    componentDidMount() {
+        console.log('componentDidMount');
+    }
+
+    componentWillUpdate() {
+        console.log('componentWillUpdate');
+    }
+
+    componentDidUpdate() {
+        console.log('componentDidUpdate');
+    }
+
+    componentWillUnmount() {
+        console.log('componentWillUnmount');
+    }
+
+    componentDidCatch() {
+        console.log('componentDidCatch');
+    }
+
     changeToDoInput(event) {
         this.setState({ inputValue: event.target.value });
     }
@@ -102,7 +126,6 @@ class AddToDoItem extends React.Component {
     }
 
     componentDidUpdate() {
-        console.log('componentDidUpdate');
         const areAllToDoDone = this.checkIfAllToDoDone();
         if (areAllToDoDone !== this.state.areAllToDoDone) {
             this.setState({ areAllToDoDone: areAllToDoDone });
@@ -110,6 +133,8 @@ class AddToDoItem extends React.Component {
     }
 
     render() {
+        console.log('AddToDoItem');
+
         const toDoControls = {
             doneAllToDo: this.doneAllToDo,
             areAllToDoDone: this.state.areAllToDoDone,

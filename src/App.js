@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import AddComment from './comments/functionComponent/AddComment';
+import CommentForm from './comments/functionComponent/CommentForm';
 // import AddComment from './comments/classComponent/AddComment';
 import ToDoContext from './context';
 import CommentDetails from './fakecomments/CommentDetails';
@@ -13,59 +13,30 @@ import SideBar from './sidebar/SideBar';
 import SideBar1 from './sidebar/SideBar1';
 import SideBar2 from './sidebar/SideBar2';
 
+console.log('outer');
+
 class App extends React.Component {
     constructor() {
         super();
-        console.log('App constructor');
-    }
-
-    componentWillMount() {
-        // console.log('componentWillMount');
-    }
-
-    componentDidMount() {
-        // console.log('componentDidMount');
-    }
-
-    componentWillUpdate() {
-        // console.log('componentWillUpdate');
-    }
-
-    componentDidUpdate() {
-        // console.log('componentDidUpdate');
-    }
-
-    componentWillUnmount() {
-        // console.log('componentWillUnmount');
-    }
-
-    componentDidCatch() {
-        // console.log('componentDidCatch');
-    }
-
-    static getDerivedStateFromError(error) {
-        // console.log('getDerivedStateFromError');
+        console.log('constructor');
     }
 
     render() {
-        // console.log('render');
+        console.log('render');
 
         return (
             <div className="App">
                 <header className="App-header">
-                    <h1>React learning</h1>
+                    <h1>React learning - {Date.now()}</h1>
                 </header>
                 <main className="main">
                     <section className="section comments-section">
                         <ToDoContext.Provider value="Comments"><SectionTitle /></ToDoContext.Provider>
-                        <AddComment />
+                        <CommentForm />
                     </section>
 
                     <section className="section todo-section">
                         <ToDoContext.Provider value="ToDos"><SectionTitle /></ToDoContext.Provider>
-
-                        <div id="info"></div>
-
                         <AddToDoItem />
                     </section>
 
@@ -92,4 +63,3 @@ class App extends React.Component {
 }
 
 export default App;
-

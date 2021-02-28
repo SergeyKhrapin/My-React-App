@@ -2,6 +2,8 @@ import React from 'react';
 import CommentCard from './CommentCard';
 
 const CommentList = (props) => {
+    console.log('CommentList');
+
     const comments = props.comments.map((comment, i) => {
         return <CommentCard key={i} comment={comment} />;
     });

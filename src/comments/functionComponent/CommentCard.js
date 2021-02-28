@@ -1,7 +1,9 @@
 import React from 'react';
 
 const CommentCard = props => {
-    return <li>{props.comment.message}</li>;
+    console.log('CommentCard');
+
+    return <li>{props.comment.message} - {Date.now()}</li>;
 }
 
 export default CommentCard;
