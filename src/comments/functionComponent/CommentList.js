@@ -1,15 +1,19 @@
-import React, { memo } from 'react';
-import CommentCard from './CommentCard';
+import React, { memo } from "react";
+import CommentCard from "./CommentCard";
 
 const CommentList = ({ comments }) => {
-    console.log('CommentList');
+  //   console.log("CommentList", comments);
 
-    return (
-        <>
-            <h3>CommentList - {Date.now()}</h3>
-            <ul>{comments.map((comment, i) => <CommentCard key={i} comment={comment} />)}</ul>
-        </>
-    );
-}
+  return (
+    <>
+      <h3>CommentList - {Date.now()}</h3>
+      <ul>
+        {Object.values(comments).map((comment, i) => (
+          <CommentCard key={i} comment={comment} />
+        ))}
+      </ul>
+    </>
+  );
+};
 
 export default memo(CommentList);
