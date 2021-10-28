@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import CommentList from "./CommentList";
 
 const styles = {
@@ -15,6 +15,10 @@ const myWorker = new Worker("worker.js");
 
 const CommentForm = () => {
   //   console.log("CommentForm");
+
+	console.clear()
+
+  const textareaRef = useRef()
 
   function setInitialValue() {
     // console.log("Some expensive calculation");
@@ -92,7 +96,9 @@ const CommentForm = () => {
   // Fire when rendering is completed
   // Only if comments variable is changed (when comment is submited)
   useEffect(() => {
-    handleRenderingCompletion();
+		handleRenderingCompletion();
+		textareaRef.current.focus()
+		
     // Remove mouseleave listener when comment is submited
     // Note: we should use return
     return () => {
@@ -113,11 +119,12 @@ const CommentForm = () => {
       <h3>{Date.now()}</h3>
       <form onSubmit={onTextareaSubmit} style={styles}>
         <textarea
+					ref={textareaRef}
           value={value}
           onChange={onTextareaChange}
           onKeyPress={onTextareaKeypress}
           placeholder="What's on your mind?"
-          autoFocus
+          // autoFocus
         ></textarea>
         <input type="submit" />
       </form>
