@@ -1,39 +1,29 @@
-import React from "react";
-import withBorder from "../utilities/withBorder";
+import React, { useState, useRef } from "react"
+import withBorder from "../utilities/withBorder"
 
-class Stopwatch extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      count: 0,
-    };
-  }
+const Stopwatch = () => {
+	const [count, setCount] = useState(0)
+	const intervalID = useRef(null)
+	
+	const handleStopwatch = () => {
+		if (!count) {
+			intervalID.current = setInterval(() => {
+				setCount(c => ++c)
+			}, 1000)
+		} else {
+			clearInterval(intervalID.current)
+			setCount(0)
+		}
+	}
 
-  componentWillMount() {
-    this.startButton = "Start";
-    this.stopButton = "Stop";
-    this.handleStopwatch = () => {
-      if (!this.state.count) {
-        this.intervalID = setInterval(() => {
-          this.setState({ count: ++this.state.count });
-        }, 1000);
-      } else {
-        clearInterval(this.intervalID);
-        this.setState({ count: 0 });
-      }
-    };
-  }
-
-  render() {
-    return (
-      <div>
-        <h3>{this.state.count}</h3>
-        <button onClick={this.handleStopwatch}>
-          {this.state.count ? this.stopButton : this.startButton}
-        </button>
-      </div>
-    );
-  }
+	return (
+		<div>
+			<h3>{count}</h3>
+			<button onClick={handleStopwatch}>
+				{count ? 'Stop' : 'Start'}
+			</button>
+		</div>
+	)
 }
 
-export default withBorder(Stopwatch);
+export default withBorder(Stopwatch)
