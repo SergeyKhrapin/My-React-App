@@ -13,17 +13,12 @@ import SideBar from "./sidebar/SideBar";
 import SideBar1 from "./sidebar/SideBar1";
 import SideBar2 from "./sidebar/SideBar2";
 
-console.log("outer");
-
 class App extends React.Component {
   constructor() {
     super();
-    console.log("constructor");
   }
 
   render() {
-    console.log("render");
-
     return (
       <div className="App">
         <header className="App-header">

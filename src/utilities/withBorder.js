@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const withBorder = (Component) => {
-  console.log("Component", Component);
   const useInputHandlerAndValue = () => {
     const [color, setColor] = useState("gray");
     return {
@@ -11,7 +10,6 @@ const withBorder = (Component) => {
   };
 
   const WrapperComponent = (props) => {
-    console.log("props", props);
     const inputHandlerAndValue = useInputHandlerAndValue();
     const styles = {
       padding: "10px",

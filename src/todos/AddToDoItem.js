@@ -25,27 +25,27 @@ class AddToDoItem extends React.Component {
     }
 
     componentWillMount() {
-        console.log('componentWillMount');
+        // console.log('componentWillMount');
     }
 
     componentDidMount() {
-        console.log('componentDidMount');
+        // console.log('componentDidMount');
     }
 
     componentWillUpdate() {
-        console.log('componentWillUpdate');
+        // console.log('componentWillUpdate');
     }
 
     componentDidUpdate() {
-        console.log('componentDidUpdate');
+        // console.log('componentDidUpdate');
     }
 
     componentWillUnmount() {
-        console.log('componentWillUnmount');
+        // console.log('componentWillUnmount');
     }
 
     componentDidCatch() {
-        console.log('componentDidCatch');
+        // console.log('componentDidCatch');
     }
 
     changeToDoInput(event) {
@@ -133,8 +133,6 @@ class AddToDoItem extends React.Component {
     }
 
     render() {
-        console.log('AddToDoItem');
-
         const toDoControls = {
             doneAllToDo: this.doneAllToDo,
             areAllToDoDone: this.state.areAllToDoDone,

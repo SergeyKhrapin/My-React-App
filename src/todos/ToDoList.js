@@ -14,8 +14,6 @@ const styles = {
 
 class ToDoList extends React.Component {
     render() {
-        console.log('ToDoList');
-
         return (
             <>
                 <h3>{Date.now()}</h3>

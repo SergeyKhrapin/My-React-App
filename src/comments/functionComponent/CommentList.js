@@ -2,8 +2,6 @@ import React, { memo } from "react";
 import CommentCard from "./CommentCard";
 
 const CommentList = ({ comments }) => {
-  //   console.log("CommentList", comments);
-
   return (
     <>
       <h3>CommentList - {Date.now()}</h3>

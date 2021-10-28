@@ -24,8 +24,6 @@ const styles = {
 };
 
 const ToDoItems = props => {
-    console.log('ToDoItems');
-
     const { doneToDo, deleteToDo } = React.useContext(ToDoContext);
 
     const liClassName = `todo-item todo-item-${props.index}`;

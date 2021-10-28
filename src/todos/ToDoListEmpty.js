@@ -3,8 +3,6 @@ import todoConstants from '../constants/todo';
 
 class ToDoListEmpty extends React.Component {
     render() {
-        console.log('ToDoListEmpty');
-
         return (
             <>
                 <h3>{Date.now()}</h3>

@@ -12,11 +12,7 @@ class AddComment extends React.Component {
         }
 
         this.onInputChange = (val) => {
-            console.log('before setState - ', this.state.value);
-
             this.setState({value: val}, this.setStateCallback);
-
-            console.log('after setState - ', this.state.value);
         }
         
         this.onInputSubmit = (e) => {
@@ -45,7 +41,7 @@ class AddComment extends React.Component {
     }
 
     handleStateReadiness() {
-        console.log('setState completed - ', this.state.value);
+        // console.log('setState completed - ', this.state.value);
     }
 
     render() {
