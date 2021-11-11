@@ -14,10 +14,6 @@ const styles = {
 const myWorker = new Worker("worker.js");
 
 const CommentForm = () => {
-  //   console.log("CommentForm");
-
-	console.clear()
-
   const textareaRef = useRef()
 
   function setInitialValue() {
@@ -73,8 +69,7 @@ const CommentForm = () => {
       setStateValue("");
       setStateComments((state) => {
         const dateNow = Date.now();
-        // send a data to Web worker
-        myWorker.postMessage(dateNow);
+        myWorker.postMessage(dateNow); // send a data to Web worker
         return {
           ...state,
           [dateNow]: {
@@ -84,35 +79,11 @@ const CommentForm = () => {
         };
       });
     }
-
-    // It doesn't work here!
-    // window.removeEventListener("mousemove", mouseMoveHandler);
   }
 
-  function handleRenderingCompletion() {
-    // console.log("handleRenderingCompletion");
-  }
-
-  // Fire when rendering is completed
-  // Only if comments variable is changed (when comment is submited)
   useEffect(() => {
-		handleRenderingCompletion();
 		textareaRef.current.focus()
-		
-    // Remove mouseleave listener when comment is submited
-    // Note: we should use return
-    return () => {
-      window.removeEventListener("mousemove", mouseMoveHandler);
-    };
   }, [comments]);
-
-  function mouseMoveHandler() {
-    // console.log("move");
-  }
-
-  useEffect(() => {
-    window.addEventListener("mousemove", mouseMoveHandler); // Executed only once (on first rendering) because the second parameter is an empty array
-  }, []);
 
   return (
     <>
@@ -124,8 +95,7 @@ const CommentForm = () => {
           onChange={onTextareaChange}
           onKeyPress={onTextareaKeypress}
           placeholder="What's on your mind?"
-          // autoFocus
-        ></textarea>
+          ></textarea>
         <input type="submit" />
       </form>
       <CommentList comments={comments} />
