@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import CommentList from "./CommentList";
+import React, { useState, useEffect, useRef, Suspense, lazy } from "react";
+const CommentList = lazy(() => import("./CommentList"));
 
 const styles = {
   display: "flex",
@@ -30,7 +30,7 @@ const CommentForm = () => {
   // setInitialValue() is executed only once on the first render
   let [value, setStateValue] = useState(() => setInitialValue());
 
-  let [comments, setStateComments] = useState({});
+  let [comments, setStateComments] = useState(null);
 
   //   this handler gets called when getting the response from worker.js
   //   until getting the response a page is not frozen and a user can interact with it
@@ -98,7 +98,11 @@ const CommentForm = () => {
           ></textarea>
         <input type="submit" />
       </form>
-      <CommentList comments={comments} />
+      { comments && (
+        <Suspense fallback={null}>
+          <CommentList comments={comments} />
+        </Suspense>
+      ) }
     </>
   );
 };
