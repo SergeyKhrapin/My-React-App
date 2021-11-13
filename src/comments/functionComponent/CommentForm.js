@@ -1,5 +1,7 @@
-import React, { useState, useEffect, useRef, Suspense, lazy } from "react";
-const CommentList = lazy(() => import("./CommentList"));
+import React, { useState, useEffect, useRef, lazy } from "react";
+import withSuspense from "../../utilities/withSuspense";
+const CommentListLazy = lazy(() => import("./CommentList"));
+const CommentList = withSuspense(CommentListLazy)
 
 const styles = {
   display: "flex",
@@ -98,11 +100,7 @@ const CommentForm = () => {
           ></textarea>
         <input type="submit" />
       </form>
-      { comments && (
-        <Suspense fallback={null}>
-          <CommentList comments={comments} />
-        </Suspense>
-      ) }
+      { comments && <CommentList comments={comments} /> }
     </>
   );
 };
